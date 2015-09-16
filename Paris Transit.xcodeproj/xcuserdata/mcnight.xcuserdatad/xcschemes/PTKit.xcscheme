@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D6C4CEFE1BA9A40B00795085"
-               BuildableName = "Paris Transit.app"
-               BlueprintName = "Paris Transit"
+               BlueprintIdentifier = "D6C4CF281BA9A42200795085"
+               BuildableName = "PTKit.framework"
+               BlueprintName = "PTKit"
                ReferencedContainer = "container:Paris Transit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,36 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D6C4CF141BA9A40C00795085"
-               BuildableName = "Paris TransitTests.xctest"
-               BlueprintName = "Paris TransitTests"
-               ReferencedContainer = "container:Paris Transit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D6C4CF311BA9A42200795085"
-               BuildableName = "PTKitTests.xctest"
-               BlueprintName = "PTKitTests"
-               ReferencedContainer = "container:Paris Transit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D6C4CEFE1BA9A40B00795085"
-            BuildableName = "Paris Transit.app"
-            BlueprintName = "Paris Transit"
-            ReferencedContainer = "container:Paris Transit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -71,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D6C4CEFE1BA9A40B00795085"
-            BuildableName = "Paris Transit.app"
-            BlueprintName = "Paris Transit"
+            BlueprintIdentifier = "D6C4CF281BA9A42200795085"
+            BuildableName = "PTKit.framework"
+            BlueprintName = "PTKit"
             ReferencedContainer = "container:Paris Transit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -90,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D6C4CEFE1BA9A40B00795085"
-            BuildableName = "Paris Transit.app"
-            BlueprintName = "Paris Transit"
+            BlueprintIdentifier = "D6C4CF281BA9A42200795085"
+            BuildableName = "PTKit.framework"
+            BlueprintName = "PTKit"
             ReferencedContainer = "container:Paris Transit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

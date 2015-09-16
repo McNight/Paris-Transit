@@ -14,6 +14,16 @@
 		D6C4CF0C1BA9A40B00795085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF0B1BA9A40B00795085 /* Assets.xcassets */; };
 		D6C4CF0F1BA9A40B00795085 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF0D1BA9A40B00795085 /* LaunchScreen.storyboard */; };
 		D6C4CF1A1BA9A40C00795085 /* Paris_TransitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF191BA9A40C00795085 /* Paris_TransitTests.swift */; };
+		D6C4CF2C1BA9A42200795085 /* PTKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D6C4CF2B1BA9A42200795085 /* PTKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6C4CF331BA9A42200795085 /* PTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C4CF291BA9A42200795085 /* PTKit.framework */; };
+		D6C4CF3A1BA9A42200795085 /* PTKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF391BA9A42200795085 /* PTKitTests.swift */; };
+		D6C4CF3E1BA9A42200795085 /* PTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C4CF291BA9A42200795085 /* PTKit.framework */; };
+		D6C4CF3F1BA9A42200795085 /* PTKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6C4CF291BA9A42200795085 /* PTKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6C4CF481BA9A46900795085 /* PTDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF471BA9A46900795085 /* PTDirection.swift */; };
+		D6C4CF4A1BA9A49F00795085 /* PTLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF491BA9A49F00795085 /* PTLine.swift */; };
+		D6C4CF4C1BA9A51500795085 /* PTStopPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF4B1BA9A51500795085 /* PTStopPlace.swift */; };
+		D6C4CF4F1BA9A76200795085 /* PTRATPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF4E1BA9A76200795085 /* PTRATPProvider.swift */; };
+		D6C4CF521BA9C5E800795085 /* PTProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF511BA9C5E800795085 /* PTProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,7 +34,42 @@
 			remoteGlobalIDString = D6C4CEFE1BA9A40B00795085;
 			remoteInfo = "Paris Transit";
 		};
+		D6C4CF341BA9A42200795085 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6C4CEF71BA9A40B00795085 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D6C4CF281BA9A42200795085;
+			remoteInfo = PTKit;
+		};
+		D6C4CF361BA9A42200795085 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6C4CEF71BA9A40B00795085 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D6C4CEFE1BA9A40B00795085;
+			remoteInfo = "Paris Transit";
+		};
+		D6C4CF3C1BA9A42200795085 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6C4CEF71BA9A40B00795085 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D6C4CF281BA9A42200795085;
+			remoteInfo = PTKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D6C4CF431BA9A42200795085 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D6C4CF3F1BA9A42200795085 /* PTKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D6C4CEFF1BA9A40B00795085 /* Paris Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paris Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +83,17 @@
 		D6C4CF151BA9A40C00795085 /* Paris TransitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Paris TransitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4CF191BA9A40C00795085 /* Paris_TransitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paris_TransitTests.swift; sourceTree = "<group>"; };
 		D6C4CF1B1BA9A40C00795085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6C4CF291BA9A42200795085 /* PTKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PTKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6C4CF2B1BA9A42200795085 /* PTKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTKit.h; sourceTree = "<group>"; };
+		D6C4CF2D1BA9A42200795085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6C4CF321BA9A42200795085 /* PTKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PTKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6C4CF391BA9A42200795085 /* PTKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTKitTests.swift; sourceTree = "<group>"; };
+		D6C4CF3B1BA9A42200795085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6C4CF471BA9A46900795085 /* PTDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTDirection.swift; sourceTree = "<group>"; };
+		D6C4CF491BA9A49F00795085 /* PTLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTLine.swift; sourceTree = "<group>"; };
+		D6C4CF4B1BA9A51500795085 /* PTStopPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTStopPlace.swift; sourceTree = "<group>"; };
+		D6C4CF4E1BA9A76200795085 /* PTRATPProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTRATPProvider.swift; sourceTree = "<group>"; };
+		D6C4CF511BA9C5E800795085 /* PTProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6C4CF3E1BA9A42200795085 /* PTKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +109,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6C4CF251BA9A42200795085 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6C4CF2F1BA9A42200795085 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6C4CF331BA9A42200795085 /* PTKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +135,8 @@
 			children = (
 				D6C4CF011BA9A40B00795085 /* Paris Transit */,
 				D6C4CF181BA9A40C00795085 /* Paris TransitTests */,
+				D6C4CF2A1BA9A42200795085 /* PTKit */,
+				D6C4CF381BA9A42200795085 /* PTKitTests */,
 				D6C4CF001BA9A40B00795085 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +146,8 @@
 			children = (
 				D6C4CEFF1BA9A40B00795085 /* Paris Transit.app */,
 				D6C4CF151BA9A40C00795085 /* Paris TransitTests.xctest */,
+				D6C4CF291BA9A42200795085 /* PTKit.framework */,
+				D6C4CF321BA9A42200795085 /* PTKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,7 +175,57 @@
 			path = "Paris TransitTests";
 			sourceTree = "<group>";
 		};
+		D6C4CF2A1BA9A42200795085 /* PTKit */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF2B1BA9A42200795085 /* PTKit.h */,
+				D6C4CF501BA9C5DD00795085 /* Providers */,
+				D6C4CF4D1BA9A72A00795085 /* Model */,
+				D6C4CF2D1BA9A42200795085 /* Info.plist */,
+			);
+			path = PTKit;
+			sourceTree = "<group>";
+		};
+		D6C4CF381BA9A42200795085 /* PTKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF391BA9A42200795085 /* PTKitTests.swift */,
+				D6C4CF3B1BA9A42200795085 /* Info.plist */,
+			);
+			path = PTKitTests;
+			sourceTree = "<group>";
+		};
+		D6C4CF4D1BA9A72A00795085 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF471BA9A46900795085 /* PTDirection.swift */,
+				D6C4CF491BA9A49F00795085 /* PTLine.swift */,
+				D6C4CF4B1BA9A51500795085 /* PTStopPlace.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D6C4CF501BA9C5DD00795085 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF511BA9C5E800795085 /* PTProvider.swift */,
+				D6C4CF4E1BA9A76200795085 /* PTRATPProvider.swift */,
+			);
+			name = Providers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D6C4CF261BA9A42200795085 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6C4CF2C1BA9A42200795085 /* PTKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		D6C4CEFE1BA9A40B00795085 /* Paris Transit */ = {
@@ -109,10 +235,12 @@
 				D6C4CEFB1BA9A40B00795085 /* Sources */,
 				D6C4CEFC1BA9A40B00795085 /* Frameworks */,
 				D6C4CEFD1BA9A40B00795085 /* Resources */,
+				D6C4CF431BA9A42200795085 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D6C4CF3D1BA9A42200795085 /* PBXTargetDependency */,
 			);
 			name = "Paris Transit";
 			productName = "Paris Transit";
@@ -137,12 +265,50 @@
 			productReference = D6C4CF151BA9A40C00795085 /* Paris TransitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D6C4CF281BA9A42200795085 /* PTKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6C4CF401BA9A42200795085 /* Build configuration list for PBXNativeTarget "PTKit" */;
+			buildPhases = (
+				D6C4CF241BA9A42200795085 /* Sources */,
+				D6C4CF251BA9A42200795085 /* Frameworks */,
+				D6C4CF261BA9A42200795085 /* Headers */,
+				D6C4CF271BA9A42200795085 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PTKit;
+			productName = PTKit;
+			productReference = D6C4CF291BA9A42200795085 /* PTKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D6C4CF311BA9A42200795085 /* PTKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6C4CF441BA9A42200795085 /* Build configuration list for PBXNativeTarget "PTKitTests" */;
+			buildPhases = (
+				D6C4CF2E1BA9A42200795085 /* Sources */,
+				D6C4CF2F1BA9A42200795085 /* Frameworks */,
+				D6C4CF301BA9A42200795085 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D6C4CF351BA9A42200795085 /* PBXTargetDependency */,
+				D6C4CF371BA9A42200795085 /* PBXTargetDependency */,
+			);
+			name = PTKitTests;
+			productName = PTKitTests;
+			productReference = D6C4CF321BA9A42200795085 /* PTKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D6C4CEF71BA9A40B00795085 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Vanadium Applications";
 				TargetAttributes = {
@@ -151,6 +317,15 @@
 						DevelopmentTeam = 6NVS48W6G3;
 					};
 					D6C4CF141BA9A40C00795085 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 6NVS48W6G3;
+						TestTargetID = D6C4CEFE1BA9A40B00795085;
+					};
+					D6C4CF281BA9A42200795085 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 6NVS48W6G3;
+					};
+					D6C4CF311BA9A42200795085 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 6NVS48W6G3;
 						TestTargetID = D6C4CEFE1BA9A40B00795085;
@@ -172,6 +347,8 @@
 			targets = (
 				D6C4CEFE1BA9A40B00795085 /* Paris Transit */,
 				D6C4CF141BA9A40C00795085 /* Paris TransitTests */,
+				D6C4CF281BA9A42200795085 /* PTKit */,
+				D6C4CF311BA9A42200795085 /* PTKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -188,6 +365,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D6C4CF131BA9A40C00795085 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6C4CF271BA9A42200795085 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6C4CF301BA9A42200795085 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -215,6 +406,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6C4CF241BA9A42200795085 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6C4CF481BA9A46900795085 /* PTDirection.swift in Sources */,
+				D6C4CF4F1BA9A76200795085 /* PTRATPProvider.swift in Sources */,
+				D6C4CF4A1BA9A49F00795085 /* PTLine.swift in Sources */,
+				D6C4CF4C1BA9A51500795085 /* PTStopPlace.swift in Sources */,
+				D6C4CF521BA9C5E800795085 /* PTProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6C4CF2E1BA9A42200795085 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6C4CF3A1BA9A42200795085 /* PTKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -222,6 +433,21 @@
 			isa = PBXTargetDependency;
 			target = D6C4CEFE1BA9A40B00795085 /* Paris Transit */;
 			targetProxy = D6C4CF161BA9A40C00795085 /* PBXContainerItemProxy */;
+		};
+		D6C4CF351BA9A42200795085 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D6C4CF281BA9A42200795085 /* PTKit */;
+			targetProxy = D6C4CF341BA9A42200795085 /* PBXContainerItemProxy */;
+		};
+		D6C4CF371BA9A42200795085 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D6C4CEFE1BA9A40B00795085 /* Paris Transit */;
+			targetProxy = D6C4CF361BA9A42200795085 /* PBXContainerItemProxy */;
+		};
+		D6C4CF3D1BA9A42200795085 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D6C4CF281BA9A42200795085 /* PTKit */;
+			targetProxy = D6C4CF3C1BA9A42200795085 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -332,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Paris Transit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.Paris-Transit";
@@ -343,6 +570,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Paris Transit/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.Paris-Transit";
@@ -374,6 +602,69 @@
 			};
 			name = Release;
 		};
+		D6C4CF411BA9A42200795085 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PTKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.PTKit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D6C4CF421BA9A42200795085 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PTKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.PTKit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D6C4CF451BA9A42200795085 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PTKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.PTKitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Paris Transit.app/Paris Transit";
+			};
+			name = Debug;
+		};
+		D6C4CF461BA9A42200795085 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PTKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.PTKitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Paris Transit.app/Paris Transit";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -399,6 +690,22 @@
 			buildConfigurations = (
 				D6C4CF221BA9A40C00795085 /* Debug */,
 				D6C4CF231BA9A40C00795085 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D6C4CF401BA9A42200795085 /* Build configuration list for PBXNativeTarget "PTKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6C4CF411BA9A42200795085 /* Debug */,
+				D6C4CF421BA9A42200795085 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D6C4CF441BA9A42200795085 /* Build configuration list for PBXNativeTarget "PTKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6C4CF451BA9A42200795085 /* Debug */,
+				D6C4CF461BA9A42200795085 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
