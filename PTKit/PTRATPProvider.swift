@@ -9,11 +9,11 @@
 import Foundation
 import CoreLocation
 
-class PTRATPProvider: NSObject {
+class PTRATPProvider: PTProvider {
+    static let sharedProvider: PTProvider = PTRATPProvider()
+    
     var stopPlaces = [Int : PTStopPlace]()
     var finishedLoading = false
-    
-    static let sharedProvider = PTRATPProvider()
     
     func loadStopPlaces(completionHandler: (Bool) -> ()) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D6C4CF031BA9A40B00795085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF021BA9A40B00795085 /* AppDelegate.swift */; };
-		D6C4CF051BA9A40B00795085 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF041BA9A40B00795085 /* FirstViewController.swift */; };
-		D6C4CF071BA9A40B00795085 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF061BA9A40B00795085 /* SecondViewController.swift */; };
 		D6C4CF0A1BA9A40B00795085 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF081BA9A40B00795085 /* Main.storyboard */; };
 		D6C4CF0C1BA9A40B00795085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF0B1BA9A40B00795085 /* Assets.xcassets */; };
 		D6C4CF0F1BA9A40B00795085 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF0D1BA9A40B00795085 /* LaunchScreen.storyboard */; };
@@ -24,6 +22,10 @@
 		D6C4CF4C1BA9A51500795085 /* PTStopPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF4B1BA9A51500795085 /* PTStopPlace.swift */; };
 		D6C4CF4F1BA9A76200795085 /* PTRATPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF4E1BA9A76200795085 /* PTRATPProvider.swift */; };
 		D6C4CF521BA9C5E800795085 /* PTProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF511BA9C5E800795085 /* PTProvider.swift */; };
+		D6C4CF551BA9C7FC00795085 /* PTTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF541BA9C7FC00795085 /* PTTimetable.swift */; };
+		D6C4CF571BA9CA4500795085 /* PTLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF561BA9CA4500795085 /* PTLocationManager.swift */; };
+		D6C4CF5A1BA9CFAA00795085 /* PTLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF591BA9CFAA00795085 /* PTLocationManagerDelegate.swift */; };
+		D6C4CF601BA9D32600795085 /* PTPreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF5F1BA9D32600795085 /* PTPreferencesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,8 +76,6 @@
 /* Begin PBXFileReference section */
 		D6C4CEFF1BA9A40B00795085 /* Paris Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paris Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4CF021BA9A40B00795085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D6C4CF041BA9A40B00795085 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		D6C4CF061BA9A40B00795085 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		D6C4CF091BA9A40B00795085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D6C4CF0B1BA9A40B00795085 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6C4CF0E1BA9A40B00795085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,6 +94,10 @@
 		D6C4CF4B1BA9A51500795085 /* PTStopPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTStopPlace.swift; sourceTree = "<group>"; };
 		D6C4CF4E1BA9A76200795085 /* PTRATPProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTRATPProvider.swift; sourceTree = "<group>"; };
 		D6C4CF511BA9C5E800795085 /* PTProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTProvider.swift; sourceTree = "<group>"; };
+		D6C4CF541BA9C7FC00795085 /* PTTimetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTTimetable.swift; sourceTree = "<group>"; };
+		D6C4CF561BA9CA4500795085 /* PTLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTLocationManager.swift; sourceTree = "<group>"; };
+		D6C4CF591BA9CFAA00795085 /* PTLocationManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTLocationManagerDelegate.swift; sourceTree = "<group>"; };
+		D6C4CF5F1BA9D32600795085 /* PTPreferencesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTPreferencesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,8 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				D6C4CF021BA9A40B00795085 /* AppDelegate.swift */,
-				D6C4CF041BA9A40B00795085 /* FirstViewController.swift */,
-				D6C4CF061BA9A40B00795085 /* SecondViewController.swift */,
 				D6C4CF081BA9A40B00795085 /* Main.storyboard */,
 				D6C4CF0B1BA9A40B00795085 /* Assets.xcassets */,
 				D6C4CF0D1BA9A40B00795085 /* LaunchScreen.storyboard */,
@@ -179,8 +181,10 @@
 			isa = PBXGroup;
 			children = (
 				D6C4CF2B1BA9A42200795085 /* PTKit.h */,
+				D6C4CF581BA9CA4F00795085 /* Managers */,
 				D6C4CF501BA9C5DD00795085 /* Providers */,
 				D6C4CF4D1BA9A72A00795085 /* Model */,
+				D6C4CF531BA9C7B600795085 /* Timetable */,
 				D6C4CF2D1BA9A42200795085 /* Info.plist */,
 			);
 			path = PTKit;
@@ -208,10 +212,60 @@
 		D6C4CF501BA9C5DD00795085 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				D6C4CF5B1BA9D2FA00795085 /* Protocols */,
+				D6C4CF5C1BA9D30900795085 /* Providers */,
+			);
+			name = Providers;
+			sourceTree = "<group>";
+		};
+		D6C4CF531BA9C7B600795085 /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF541BA9C7FC00795085 /* PTTimetable.swift */,
+			);
+			name = Timetable;
+			sourceTree = "<group>";
+		};
+		D6C4CF581BA9CA4F00795085 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF5D1BA9D31100795085 /* Protocols */,
+				D6C4CF5E1BA9D31900795085 /* Managers */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		D6C4CF5B1BA9D2FA00795085 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
 				D6C4CF511BA9C5E800795085 /* PTProvider.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		D6C4CF5C1BA9D30900795085 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
 				D6C4CF4E1BA9A76200795085 /* PTRATPProvider.swift */,
 			);
 			name = Providers;
+			sourceTree = "<group>";
+		};
+		D6C4CF5D1BA9D31100795085 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF591BA9CFAA00795085 /* PTLocationManagerDelegate.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		D6C4CF5E1BA9D31900795085 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF561BA9CA4500795085 /* PTLocationManager.swift */,
+				D6C4CF5F1BA9D32600795085 /* PTPreferencesManager.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,9 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6C4CF071BA9A40B00795085 /* SecondViewController.swift in Sources */,
 				D6C4CF031BA9A40B00795085 /* AppDelegate.swift in Sources */,
-				D6C4CF051BA9A40B00795085 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,8 +463,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6C4CF481BA9A46900795085 /* PTDirection.swift in Sources */,
+				D6C4CF571BA9CA4500795085 /* PTLocationManager.swift in Sources */,
+				D6C4CF601BA9D32600795085 /* PTPreferencesManager.swift in Sources */,
 				D6C4CF4F1BA9A76200795085 /* PTRATPProvider.swift in Sources */,
 				D6C4CF4A1BA9A49F00795085 /* PTLine.swift in Sources */,
+				D6C4CF551BA9C7FC00795085 /* PTTimetable.swift in Sources */,
+				D6C4CF5A1BA9CFAA00795085 /* PTLocationManagerDelegate.swift in Sources */,
 				D6C4CF4C1BA9A51500795085 /* PTStopPlace.swift in Sources */,
 				D6C4CF521BA9C5E800795085 /* PTProvider.swift in Sources */,
 			);
@@ -563,6 +619,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.Paris-Transit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -575,6 +632,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.Paris-Transit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
