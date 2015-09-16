@@ -9,13 +9,13 @@
 import Foundation
 import CoreLocation
 
-class PTRATPProvider: PTProvider {
-    static let sharedProvider: PTProvider = PTRATPProvider()
+public class PTRATPProvider: PTProvider {
+    public static let sharedProvider: PTProvider = PTRATPProvider()
     
-    var stopPlaces = [Int : PTStopPlace]()
-    var finishedLoading = false
+    private var stopPlaces = [Int : PTStopPlace]()
+    private var finishedLoading = false
     
-    func loadStopPlaces(completionHandler: (Bool) -> ()) {
+    public func loadStopPlaces(completionHandler: (Bool) -> ()) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
             guard let jsonPath = NSBundle(forClass: self.dynamicType).pathForResource("RPStopPlaces", ofType: "json") else {
                 completionHandler(false)
@@ -33,10 +33,9 @@ class PTRATPProvider: PTProvider {
                     let latitude = stopPlaceDictionary["latitude"] as! Float
                     let longitude = stopPlaceDictionary["longitude"] as! Float
                     let lines = self.parseLines(stopPlaceDictionary["lines"] as! [[String : AnyObject]])
-                    let points = stopPlaceDictionary["stopPoints"] as! [AnyObject]
                     
                     let location = CLLocation(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-                    let parsedStopPlace = PTStopPlace(identifier: identifier, name: name, location: location, lines: lines, stopPoints: points, distance: 0)
+                    let parsedStopPlace = PTStopPlace(identifier: identifier, name: name, location: location, lines: lines, distance: 0)
                     
                     return parsedStopPlace
                 }
@@ -55,6 +54,10 @@ class PTRATPProvider: PTProvider {
                 return
             }
         }
+    }
+    
+    public func didFinishLoading() -> Bool {
+        return self.finishedLoading
     }
     
     private func parseLines(lines: [[String : AnyObject]]) -> [PTLine] {

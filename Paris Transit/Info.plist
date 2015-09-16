@@ -51,5 +51,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Votre localisation est nécessaire pour trouver l&apos;arrêt le plus proche. De plus, si vous possédez l&apos;Apple Watch, cette dernière demandera à l&apos;iPhone sa position géographique.</string>
 </dict>
 </plist>

@@ -9,6 +9,6 @@
 import Foundation
 import CoreLocation
 
-protocol PTLocationManagerDelegate {
+public protocol PTLocationManagerDelegate {
     func locationManagerGotUsersLocation(locationManager: PTLocationManager, location: CLLocation)
 }

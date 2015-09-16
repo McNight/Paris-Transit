@@ -14,7 +14,6 @@ struct PTStopPlace {
     let name: String
     let location: CLLocation
     let lines: [PTLine]
-    let stopPoints: [Any]
     var distance: CLLocationDistance
     
     mutating func updateDistanceFromPosition(position: CLLocation) {

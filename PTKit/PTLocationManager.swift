@@ -9,27 +9,27 @@
 import Foundation
 import CoreLocation
 
-class PTLocationManager: NSObject, CLLocationManagerDelegate {
-    static let sharedManager = PTLocationManager()
+public class PTLocationManager: NSObject, CLLocationManagerDelegate {
+    public static let sharedManager = PTLocationManager()
     
-    let locationManager = CLLocationManager()
-    var lastUsersLocation: CLLocation!
+    private let locationManager = CLLocationManager()
+    private var lastUsersLocation: CLLocation!
     
-    var delegate: PTLocationManagerDelegate?
+    public var delegate: PTLocationManagerDelegate?
     
-    func prepareLocationStuff() {
+    public func prepareLocationStuff() {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         self.locationManager.requestAlwaysAuthorization()
     }
     
-    func requestUsersLocation() {
+    public func requestUsersLocation() {
         self.locationManager.requestLocation()
     }
     
     // MARK: - CLLocationManagerDelegate
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             self.lastUsersLocation = location
         }
@@ -37,11 +37,11 @@ class PTLocationManager: NSObject, CLLocationManagerDelegate {
         delegate?.locationManagerGotUsersLocation(self, location: self.lastUsersLocation)
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Error updating location : \(error.localizedDescription)")
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch (status) {
         case .NotDetermined:
             print("Not determined")

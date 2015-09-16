@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct PTTimetableRequest {
+public struct PTTimetableRequest {
     let stopPlace: PTStopPlace
     let lineIndex: Int
 }
 
-struct PTTimetableResult {
+public struct PTTimetableResult {
     let destination: String
     let patternIdentifier: String
     let stopInStation: Bool
@@ -25,7 +25,7 @@ struct PTTimetableResult {
     }
 }
 
-struct PTTimetable {
+public struct PTTimetable {
     let request: PTTimetableRequest
     let result: PTTimetableResult
 }

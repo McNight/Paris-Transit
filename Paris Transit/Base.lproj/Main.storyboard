@@ -26,7 +26,7 @@
         <!--Transit-->
         <scene sceneID="U8E-Dz-7qf">
             <objects>
-                <viewController id="78u-9o-BBW" sceneMemberID="viewController">
+                <viewController id="78u-9o-BBW" customClass="TransitViewController" customModule="Paris_Transit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nJe-TR-xkY"/>
                         <viewControllerLayoutGuide type="bottom" id="Uxc-At-0rY"/>
@@ -45,7 +45,7 @@
         <!--Réglages-->
         <scene sceneID="eq6-Q4-hFg">
             <objects>
-                <viewController id="7Vf-4D-xT9" sceneMemberID="viewController">
+                <viewController id="7Vf-4D-xT9" customClass="SettingsViewController" customModule="Paris_Transit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UOg-I9-Tk9"/>
                         <viewControllerLayoutGuide type="bottom" id="yao-dz-blJ"/>

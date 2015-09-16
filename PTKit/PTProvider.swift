@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PTProvider {
+public protocol PTProvider {
     static var sharedProvider: PTProvider { get }
     
     func loadStopPlaces(completionHandler: (Bool) -> ())

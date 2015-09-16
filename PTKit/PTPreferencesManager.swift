@@ -8,15 +8,15 @@
 
 import Foundation
 
-class PTPreferencesManager {
-    static let sharedManager = PTPreferencesManager()
+public class PTPreferencesManager {
+    public static let sharedManager = PTPreferencesManager()
     
     private let usersDefaults = NSUserDefaults.standardUserDefaults()
     
-    let PTAlreadyLaunchedPreferencesKey = "PTAlreadyLaunchedPreferencesKey"
-    let PTDisplayNonStoppingTrainsPreferencesKey = "PTDisplayNonStoppingTrainsPreferencesKey"
+    private let PTAlreadyLaunchedPreferencesKey = "PTAlreadyLaunchedPreferencesKey"
+    private let PTDisplayNonStoppingTrainsPreferencesKey = "PTDisplayNonStoppingTrainsPreferencesKey"
     
-    func alreadyLaunchedVerification() -> Bool {
+    public func alreadyLaunchedVerification() -> Bool {
         let alreadyLaunched = self.usersDefaults.boolForKey(PTAlreadyLaunchedPreferencesKey)
         
         if alreadyLaunched
@@ -34,11 +34,11 @@ class PTPreferencesManager {
         self.usersDefaults.setBool(false, forKey: PTDisplayNonStoppingTrainsPreferencesKey)
     }
     
-    func displayNonStoppingTrains() -> Bool {
+    public func displayNonStoppingTrains() -> Bool {
         return self.usersDefaults.boolForKey(PTDisplayNonStoppingTrainsPreferencesKey)
     }
     
-    func setDisplayNonStoppingTrains(newValue: Bool) {
+    public func setDisplayNonStoppingTrains(newValue: Bool) {
         self.usersDefaults.setBool(newValue, forKey: PTDisplayNonStoppingTrainsPreferencesKey)
         self.usersDefaults.synchronize()
     }
