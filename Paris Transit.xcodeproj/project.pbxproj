@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D62CAA5C1BAAF96700F41C5F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62CAA5B1BAAF96700F41C5F /* MapKit.framework */; };
+		D62CAA601BAAFF3300F41C5F /* LinesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		D62CAA621BAB01A500F41C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D62CAA611BAB01A500F41C5F /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		D6A58F7C1BA9DDFC002DF0DA /* RPStopPlaces.json in Resources */ = {isa = PBXBuildFile; fileRef = D6A58F7B1BA9DDFC002DF0DA /* RPStopPlaces.json */; };
 		D6C4CF031BA9A40B00795085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF021BA9A40B00795085 /* AppDelegate.swift */; };
 		D6C4CF0A1BA9A40B00795085 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF081BA9A40B00795085 /* Main.storyboard */; };
-		D6C4CF0C1BA9A40B00795085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF0B1BA9A40B00795085 /* Assets.xcassets */; };
 		D6C4CF0F1BA9A40B00795085 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF0D1BA9A40B00795085 /* LaunchScreen.storyboard */; };
 		D6C4CF1A1BA9A40C00795085 /* Paris_TransitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF191BA9A40C00795085 /* Paris_TransitTests.swift */; };
 		D6C4CF2C1BA9A42200795085 /* PTKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D6C4CF2B1BA9A42200795085 /* PTKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -76,11 +78,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D62CAA5B1BAAF96700F41C5F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesDataSource.swift; sourceTree = "<group>"; };
+		D62CAA611BAB01A500F41C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6A58F7B1BA9DDFC002DF0DA /* RPStopPlaces.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RPStopPlaces.json; sourceTree = "<group>"; };
 		D6C4CEFF1BA9A40B00795085 /* Paris Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paris Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4CF021BA9A40B00795085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6C4CF091BA9A40B00795085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D6C4CF0B1BA9A40B00795085 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6C4CF0E1BA9A40B00795085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6C4CF101BA9A40B00795085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4CF151BA9A40C00795085 /* Paris TransitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Paris TransitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D62CAA5C1BAAF96700F41C5F /* MapKit.framework in Frameworks */,
 				D6C4CF3E1BA9A42200795085 /* PTKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,10 +143,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D62CAA5D1BAAFEFC00F41C5F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF471BA9A46900795085 /* PTDirection.swift */,
+				D6C4CF491BA9A49F00795085 /* PTLine.swift */,
+				D6C4CF4B1BA9A51500795085 /* PTStopPlace.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D62CAA5E1BAAFF0000F41C5F /* Data View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */,
+			);
+			name = "Data View Controllers";
+			sourceTree = "<group>";
+		};
 		D6C4CEF61BA9A40B00795085 = {
 			isa = PBXGroup;
 			children = (
 				D6C4CF011BA9A40B00795085 /* Paris Transit */,
+				D62CAA5B1BAAF96700F41C5F /* MapKit.framework */,
 				D6C4CF181BA9A40C00795085 /* Paris TransitTests */,
 				D6C4CF2A1BA9A42200795085 /* PTKit */,
 				D6C4CF381BA9A42200795085 /* PTKitTests */,
@@ -167,7 +191,7 @@
 				D6C4CF651BA9D76800795085 /* TransitViewController.swift */,
 				D6C4CF671BA9DAAE00795085 /* SettingsViewController.swift */,
 				D6C4CF081BA9A40B00795085 /* Main.storyboard */,
-				D6C4CF0B1BA9A40B00795085 /* Assets.xcassets */,
+				D62CAA611BAB01A500F41C5F /* Assets.xcassets */,
 				D6C4CF0D1BA9A40B00795085 /* LaunchScreen.storyboard */,
 				D6C4CF101BA9A40B00795085 /* Info.plist */,
 			);
@@ -209,9 +233,8 @@
 		D6C4CF4D1BA9A72A00795085 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D6C4CF471BA9A46900795085 /* PTDirection.swift */,
-				D6C4CF491BA9A49F00795085 /* PTLine.swift */,
-				D6C4CF4B1BA9A51500795085 /* PTStopPlace.swift */,
+				D62CAA5E1BAAFF0000F41C5F /* Data View Controllers */,
+				D62CAA5D1BAAFEFC00F41C5F /* Model */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -411,7 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6C4CF0F1BA9A40B00795085 /* LaunchScreen.storyboard in Resources */,
-				D6C4CF0C1BA9A40B00795085 /* Assets.xcassets in Resources */,
+				D62CAA621BAB01A500F41C5F /* Assets.xcassets in Resources */,
 				D6C4CF0A1BA9A40B00795085 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +493,7 @@
 				D6C4CF4A1BA9A49F00795085 /* PTLine.swift in Sources */,
 				D6C4CF551BA9C7FC00795085 /* PTTimetable.swift in Sources */,
 				D6C4CF5A1BA9CFAA00795085 /* PTLocationManagerDelegate.swift in Sources */,
+				D62CAA601BAAFF3300F41C5F /* LinesDataSource.swift in Sources */,
 				D6C4CF4C1BA9A51500795085 /* PTStopPlace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

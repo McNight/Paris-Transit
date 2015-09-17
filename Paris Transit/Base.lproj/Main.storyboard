@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -34,9 +34,36 @@
                     <view key="view" contentMode="scaleToFill" id="041-pM-f5Z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9mG-fd-Q7G">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8rU-a3-J9N">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="78u-9o-BBW" id="9YX-Vo-Mvm"/>
+                                        </connections>
+                                    </mapView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rj6-wK-IfH">
+                                        <rect key="frame" x="0.0" y="300" width="600" height="300"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9mG-fd-Q7G" firstAttribute="top" secondItem="041-pM-f5Z" secondAttribute="top" id="TWm-PZ-Kvd"/>
+                            <constraint firstAttribute="trailing" secondItem="9mG-fd-Q7G" secondAttribute="trailing" id="TkL-df-enR"/>
+                            <constraint firstAttribute="bottom" secondItem="9mG-fd-Q7G" secondAttribute="bottom" id="kuO-uU-WTw"/>
+                            <constraint firstItem="9mG-fd-Q7G" firstAttribute="leading" secondItem="041-pM-f5Z" secondAttribute="leading" id="wmu-sA-u7V"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Transit" id="NR9-l8-HrJ"/>
+                    <connections>
+                        <outlet property="linesTableView" destination="Rj6-wK-IfH" id="b2x-Wn-VRo"/>
+                        <outlet property="mapView" destination="8rU-a3-J9N" id="HNc-f3-AMp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zFZ-os-LQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

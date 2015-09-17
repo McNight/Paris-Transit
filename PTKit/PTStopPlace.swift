@@ -10,11 +10,11 @@ import Foundation
 import CoreLocation
 
 public struct PTStopPlace {
-    let identifier: Int
-    let name: String
-    let location: CLLocation
-    let lines: [PTLine]
-    var distance: CLLocationDistance
+    public let identifier: Int
+    public let name: String
+    public let location: CLLocation
+    public let lines: [PTLine]
+    public var distance: CLLocationDistance
     
     mutating public func updateDistanceFromLocation(usersLocation: CLLocation) -> CLLocationDistance {
         self.distance = self.location.distanceFromLocation(usersLocation)

@@ -24,8 +24,6 @@ public class PTLocationManager: NSObject, CLLocationManagerDelegate {
         
         if CLLocationManager.authorizationStatus() == .NotDetermined {
             self.locationManager.requestAlwaysAuthorization()
-        } else {
-            self.requestUsersLocation()
         }
     }
     
@@ -62,6 +60,7 @@ public class PTLocationManager: NSObject, CLLocationManagerDelegate {
             print("Denied")
         case .AuthorizedAlways:
             print("Authorized Always")
+            self.requestUsersLocation()
         case .AuthorizedWhenInUse:
             print("Authorized When In Use")
         }
