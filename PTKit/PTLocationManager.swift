@@ -19,8 +19,14 @@ public class PTLocationManager: NSObject, CLLocationManagerDelegate {
     
     public func prepareLocationStuff() {
         self.locationManager.delegate = self
+        self.locationManager.distanceFilter = 100.0
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        self.locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            self.locationManager.requestAlwaysAuthorization()
+        } else {
+            self.requestUsersLocation()
+        }
     }
     
     public func requestUsersLocation() {
@@ -31,14 +37,19 @@ public class PTLocationManager: NSObject, CLLocationManagerDelegate {
     
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            self.lastUsersLocation = location
+            if location !== self.lastUsersLocation {
+                self.lastUsersLocation = location
+                delegate?.locationManagerGotUsersLocation(self, location: self.lastUsersLocation)
+            }
         }
-        
-        delegate?.locationManagerGotUsersLocation(self, location: self.lastUsersLocation)
     }
     
     public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Error updating location : \(error.localizedDescription)")
+    }
+    
+    public func locationManager(manager: CLLocationManager, didFinishDeferredUpdatesWithError error: NSError?) {
+        print("Finished !")
     }
     
     public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PTLine {
+public struct PTLine {
     let identifier: Int
     let name: String
     let code: String

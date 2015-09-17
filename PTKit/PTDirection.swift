@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PTDirection {
+public struct PTDirection {
     let identifier: Int
     let name: String
 }

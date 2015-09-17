@@ -9,18 +9,27 @@
 import Foundation
 import CoreLocation
 
-struct PTStopPlace {
+public struct PTStopPlace {
     let identifier: Int
     let name: String
     let location: CLLocation
     let lines: [PTLine]
     var distance: CLLocationDistance
     
-    mutating func updateDistanceFromPosition(position: CLLocation) {
-        self.distance = self.location.distanceFromLocation(position)
+    mutating public func updateDistanceFromLocation(usersLocation: CLLocation) -> CLLocationDistance {
+        self.distance = self.location.distanceFromLocation(usersLocation)
+        return self.distance
     }
-    
-    func description() -> String {
+        
+    public func description() -> String {
         return "\(self.name) (\(self.identifier)) - \(self.lines.count) line(s) - \(self.distance) meters from user"
     }
+}
+
+func == (lhs: PTStopPlace, rhs: PTStopPlace) -> Bool {
+    return ((lhs.identifier == rhs.identifier) && (lhs.name == rhs.name))
+}
+
+func != (lhs: PTStopPlace, rhs: PTStopPlace) -> Bool {
+    return !(lhs == rhs)
 }

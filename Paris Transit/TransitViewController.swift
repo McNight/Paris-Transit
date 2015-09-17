@@ -23,11 +23,22 @@ class TransitViewController: UIViewController, PTLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Data
+    
+    func getStopPlacesNearUsersLocation(location: CLLocation) {
+        print("getting stop places")
+        
+        PTRATPProvider.sharedProvider.loadAndfilterStopPlaces(location, radius: 500, lineType: 2, completionHandler: { (filteredStopPlaces) -> () in
+            for stopPlace in filteredStopPlaces {
+                print("Description : \(stopPlace.description())")
+            }
+        })
+    }
     
     // MARK: - Location
     
     func locationManagerGotUsersLocation(locationManager: PTLocationManager, location: CLLocation) {
-        
+        self.getStopPlacesNearUsersLocation(location)
     }
     
     func prepareLocationStuff() {
