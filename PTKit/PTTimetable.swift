@@ -9,23 +9,29 @@
 import Foundation
 
 public struct PTTimetableRequest {
-    let stopPlace: PTStopPlace
-    let lineIndex: Int
+    public let stopPlace: PTStopPlace
+    public let lineIndex: Int
+    
+    public init(stopPlace: PTStopPlace, lineIndex: Int) {
+        self.stopPlace = stopPlace
+        self.lineIndex = lineIndex
+    }
 }
 
 public struct PTTimetableResult {
-    let destination: String
-    let patternIdentifier: String
-    let stopInStation: Bool
-    let waitingTime: Int
-    let passingHour: String
+    public let destination: String
+    public let patternIdentifier: String
+    public let stopInStation: Bool
+    public let waitingTime: Int
+    public let passingHour: String
     
-    func description() -> String {
+    public func description() -> String {
         return "(\(self.patternIdentifier)) \(self.destination) at \(self.passingHour) (Stop : \(self.stopInStation))"
     }
 }
 
 public struct PTTimetable {
-    let request: PTTimetableRequest
-    let result: PTTimetableResult
+    public let request: PTTimetableRequest
+    public let firstDirectionResults: [PTTimetableResult]!
+    public let secondDirectionResults: [PTTimetableResult]!
 }

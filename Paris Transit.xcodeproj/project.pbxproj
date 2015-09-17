@@ -10,6 +10,7 @@
 		D62CAA5C1BAAF96700F41C5F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62CAA5B1BAAF96700F41C5F /* MapKit.framework */; };
 		D62CAA601BAAFF3300F41C5F /* LinesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		D62CAA621BAB01A500F41C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D62CAA611BAB01A500F41C5F /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		D62CAA641BAB078D00F41C5F /* TimetableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62CAA631BAB078D00F41C5F /* TimetableDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		D6A58F7C1BA9DDFC002DF0DA /* RPStopPlaces.json in Resources */ = {isa = PBXBuildFile; fileRef = D6A58F7B1BA9DDFC002DF0DA /* RPStopPlaces.json */; };
 		D6C4CF031BA9A40B00795085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF021BA9A40B00795085 /* AppDelegate.swift */; };
 		D6C4CF0A1BA9A40B00795085 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF081BA9A40B00795085 /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		D62CAA5B1BAAF96700F41C5F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesDataSource.swift; sourceTree = "<group>"; };
 		D62CAA611BAB01A500F41C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D62CAA631BAB078D00F41C5F /* TimetableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableDataSource.swift; sourceTree = "<group>"; };
 		D6A58F7B1BA9DDFC002DF0DA /* RPStopPlaces.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RPStopPlaces.json; sourceTree = "<group>"; };
 		D6C4CEFF1BA9A40B00795085 /* Paris Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paris Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4CF021BA9A40B00795085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,12 +155,22 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		D62CAA5E1BAAFF0000F41C5F /* Data View Controllers */ = {
+		D62CAA5E1BAAFF0000F41C5F /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
 				D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */,
+				D62CAA631BAB078D00F41C5F /* TimetableDataSource.swift */,
 			);
-			name = "Data View Controllers";
+			name = "Data Sources";
+			sourceTree = "<group>";
+		};
+		D62CAA651BAB099700F41C5F /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D6C4CF651BA9D76800795085 /* TransitViewController.swift */,
+				D6C4CF671BA9DAAE00795085 /* SettingsViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		D6C4CEF61BA9A40B00795085 = {
@@ -188,8 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				D6C4CF021BA9A40B00795085 /* AppDelegate.swift */,
-				D6C4CF651BA9D76800795085 /* TransitViewController.swift */,
-				D6C4CF671BA9DAAE00795085 /* SettingsViewController.swift */,
+				D62CAA651BAB099700F41C5F /* View Controllers */,
 				D6C4CF081BA9A40B00795085 /* Main.storyboard */,
 				D62CAA611BAB01A500F41C5F /* Assets.xcassets */,
 				D6C4CF0D1BA9A40B00795085 /* LaunchScreen.storyboard */,
@@ -233,7 +244,7 @@
 		D6C4CF4D1BA9A72A00795085 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D62CAA5E1BAAFF0000F41C5F /* Data View Controllers */,
+				D62CAA5E1BAAFF0000F41C5F /* Data Sources */,
 				D62CAA5D1BAAFEFC00F41C5F /* Model */,
 			);
 			name = Model;
@@ -486,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D62CAA641BAB078D00F41C5F /* TimetableDataSource.swift in Sources */,
 				D6C4CF481BA9A46900795085 /* PTDirection.swift in Sources */,
 				D6C4CF571BA9CA4500795085 /* PTLocationManager.swift in Sources */,
 				D6C4CF601BA9D32600795085 /* PTPreferencesManager.swift in Sources */,

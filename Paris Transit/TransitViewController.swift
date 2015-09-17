@@ -12,13 +12,20 @@ import CoreLocation
 import MapKit
 
 class TransitViewController: UIViewController, MKMapViewDelegate, PTLocationManagerDelegate {
-    var nearbyStopPlaces: [PTStopPlace]!
+    var nearestStopPlace: PTStopPlace!
+    var nearbyStopPlaces: [PTStopPlace]! {
+        didSet (newValue) {
+            nearestStopPlace = newValue.first
+        }
+    }
+    
     lazy var distanceFormatter = MKDistanceFormatter()
     
     lazy var linesDataSource = LinesDataSource()
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var linesTableView: UITableView!
+    @IBOutlet weak var timetablesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +61,7 @@ class TransitViewController: UIViewController, MKMapViewDelegate, PTLocationMana
     }
     
     private func stopPlacePinSelectedFromMapView(stopPlace: PTStopPlace) {
-        self.linesDataSource.stopPlace = stopPlace
-        self.linesTableView.dataSource = self.linesDataSource
-        self.linesTableView.reloadData()
+        self.populateLinesTableView(stopPlace)
         
         // TIMETABLE REQUEST !
     }
@@ -66,10 +71,24 @@ class TransitViewController: UIViewController, MKMapViewDelegate, PTLocationMana
     func getStopPlacesNearUsersLocation(location: CLLocation) {
         PTRATPProvider.sharedProvider.loadAndfilterStopPlaces(location, radius: 1000, lineType: 2, completionHandler: { (filteredStopPlaces) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.nearbyStopPlaces = filteredStopPlaces
-                self.displayStopPins()
+                if let filteredStopPlaces = filteredStopPlaces {
+                    self.nearbyStopPlaces = filteredStopPlaces
+                    self.populateLinesTableView(self.nearestStopPlace)
+                    self.displayStopPins()
+                }
             })
         })
+    }
+    
+    func populateLinesTableView(stopPlace: PTStopPlace) {
+        self.linesDataSource.stopPlace = stopPlace
+        self.linesTableView.dataSource = self.linesDataSource
+        self.linesTableView.reloadData()
+    }
+    
+    func timetableRequestWithStopPlace(stopPlace: PTStopPlace, lineIndex: Int) {
+        let timetableRequest = PTTimetableRequest(stopPlace: stopPlace, lineIndex: lineIndex)
+        
     }
     
     // MARK: - Location
