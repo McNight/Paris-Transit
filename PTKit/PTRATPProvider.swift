@@ -17,7 +17,7 @@ public class PTRATPProvider {
     
     private var stopPlaces = [Int : PTStopPlace]()
     
-    public func loadAndfilterStopPlaces(location: CLLocation, radius: CLLocationDistance, lineType: Int, completionHandler: ([PTStopPlace]?) -> ()) {
+    public func loadAndfilterStopPlaces(location: CLLocation, radius: CLLocationDistance, lineTypes: [Int], completionHandler: ([PTStopPlace]?) -> ()) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
             guard let jsonPath = NSBundle(forClass: self.dynamicType).pathForResource(self.PTStopPlacesFileName, ofType: "json") else {
                 completionHandler(nil)
@@ -26,10 +26,12 @@ public class PTRATPProvider {
             
             self.purgeStopPlaces()
             
-            let data = NSData(contentsOfFile: jsonPath)!
+            var data = NSData(contentsOfFile: jsonPath)
             
             do {
-                let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! NSDictionary
+                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
+                
+                data = nil
                 
                 let parseStopPlaceBlock = { (stopPlaceDictionary: [String : AnyObject]) -> (PTStopPlace?) in
                     let latitude = stopPlaceDictionary["latitude"] as! Float
@@ -50,24 +52,28 @@ public class PTRATPProvider {
                     
                     return parsedStopPlace
                 }
-                
+
                 for stopPlace in json.objectForKey("stopPlaces") as! [[String : AnyObject]] {
                     if let parsedStopPlace = parseStopPlaceBlock(stopPlace) {
                         self.stopPlaces[parsedStopPlace.identifier] = parsedStopPlace
                     }
                 }
-                
+
                 var filteredStopPlaces = [PTStopPlace]()
                 
                 for (_, stopPlace) in self.stopPlaces {
                     for line in stopPlace.lines {
-                        if line.type == lineType {
+                        if lineTypes.contains(line.type) && filteredStopPlaces.contains(stopPlace) == false {
                             filteredStopPlaces.append(stopPlace)
                         }
                     }
                 }
-            
-                completionHandler(filteredStopPlaces.sort({ $0.distance > $1.distance }))
+                
+                // Bon, dans self.stopPlaces il reste des arrêts avec pas le bon lineType.
+                
+                filteredStopPlaces = filteredStopPlaces.sort({ $0.distance < $1.distance })
+                
+                completionHandler(filteredStopPlaces)
             } catch let error as NSError {
                 print("Error parsing JSON : \(error.localizedDescription)")
                 completionHandler(nil)
@@ -80,7 +86,7 @@ public class PTRATPProvider {
         self.stopPlaces.removeAll()
     }
     
-    public func getStopTimetableWithRequest(request: PTTimetableRequest, limit: Int, completionHandler: (PTTimetable) -> Void) {
+    public func getStopTimetableWithRequest(request: PTTimetableRequest, limit: Int, completionHandler: (PTTimetable?) -> Void) {
         let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: sessionConfiguration)
         
@@ -97,25 +103,29 @@ public class PTRATPProvider {
         
         let firstURL = NSURL(string: String(firstRATPTimetableURL))
         let secondURL = NSURL(string: String(secondRATPTimetableURL))
-    
+        
         let firstDataTask = session.dataTaskWithURL(firstURL!) { (data, response, error) -> Void in
             if let error = error
             {
                 print("Response First Data Task : \(response?.description)")
                 print("Error : \(error.localizedDescription)")
+                
+                completionHandler(nil)
             }
             else
             {
-                self.parseTimetableData(data!, request: request, completionHandler: { (firstResults) -> Void in
+                self.parseTimetableData(data!, request: request, limit: limit, completionHandler: { (firstResults: [PTTimetableResult]?) -> Void in
                     let secondDataTask = session.dataTaskWithURL(secondURL!, completionHandler: { (data, response, error) -> Void in
                         if let error = error
                         {
                             print("Response Second Data Task: \(response?.description)")
                             print("Error : \(error.localizedDescription)")
+                            
+                            completionHandler(nil)
                         }
                         else
                         {
-                            self.parseTimetableData(data!, request: request, completionHandler: { (secondResults) -> Void in
+                            self.parseTimetableData(data!, request: request, limit: limit, completionHandler: { (secondResults) -> Void in
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     let timetable = PTTimetable(request: request, firstDirectionResults: firstResults, secondDirectionResults: secondResults)
                                     completionHandler(timetable)
@@ -149,14 +159,14 @@ public class PTRATPProvider {
         }
     }
     
-    private func parseTimetableData(data: NSData, request: PTTimetableRequest, completionHandler: ([PTTimetableResult]?) -> Void) {
+    private func parseTimetableData(data: NSData, request: PTTimetableRequest, limit: Int, completionHandler: ([PTTimetableResult]?) -> Void) {
         do {
             let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            let nextStopsOnLine = json.objectForKey("nextStopsOnLines") as! NSArray
-            let temp = nextStopsOnLine.firstObject as! NSDictionary
-            let nextStops = temp.objectForKey("nextStops") as! NSArray
+            let nextStopsOnLine = json.objectForKey("nextStopsOnLines") as? NSArray
+            let temp = nextStopsOnLine?.firstObject as? NSDictionary
+            let nextStops = temp?.objectForKey("nextStops") as? NSArray
             
-            guard nextStops.count > 0 else {
+            guard nextStops?.count > 0 else {
                 completionHandler(nil)
                 return
             }
@@ -164,7 +174,7 @@ public class PTRATPProvider {
             var results = [PTTimetableResult]()
             let displayNonStoppingTrains = PTPreferencesManager.sharedManager.displayNonStoppingTrains()
             
-            for nextStop in nextStops as! [[String : AnyObject]] {
+            for nextStop in nextStops! as! [[String : AnyObject]] {
                 if displayNonStoppingTrains || nextStop["bStopInStation"]!.boolValue! {
                     let destination = nextStop["destinationName"] as! String
                     let patternIdentifier = nextStop["servicePatternId"] as! String
@@ -174,6 +184,10 @@ public class PTRATPProvider {
                     
                     let result = PTTimetableResult(destination: destination, patternIdentifier: patternIdentifier, stopInStation: stopInStation, waitingTime: waitingTime, passingHour: passingHour)
                     results.append(result)
+                    
+                    if (results.count == limit) {
+                        break;
+                    }
                 }
             }
             

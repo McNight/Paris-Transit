@@ -11,7 +11,7 @@ import UIKit
 public class LinesDataSource: NSObject, UITableViewDataSource {
     public var stopPlace: PTStopPlace?
 
-    func imageNameForLineType(type: Int, code: String) -> String? {
+    private func imageNameForLineType(type: Int, code: String) -> String? {
         switch type {
         case 1:
             return "M_" + code
@@ -24,6 +24,19 @@ public class LinesDataSource: NSObject, UITableViewDataSource {
         default:
             return "L_M"
         }
+    }
+    
+    public func filteredStopPlace(stopPlace: PTStopPlace, lineTypes: [Int]) -> PTStopPlace {
+        var lines = stopPlace.lines
+        
+        for (index, line) in lines.enumerate() {
+            if lineTypes.contains(line.type) == false {
+                lines.removeAtIndex(index)
+            }
+        }
+        
+        let filteredStopPlace = PTStopPlace(identifier: stopPlace.identifier, name: stopPlace.name, location: stopPlace.location, lines: lines, distance: stopPlace.distance)
+        return filteredStopPlace
     }
     
     // MARK: - Table View Data Source
@@ -41,13 +54,13 @@ public class LinesDataSource: NSObject, UITableViewDataSource {
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+        let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell")
         
         let currentLine = self.stopPlace!.lines[indexPath.row]
         
-        cell.textLabel?.text = "Ligne " + currentLine.code
-        cell.imageView?.image = UIImage(named: self.imageNameForLineType(currentLine.type, code: currentLine.code)!)
+        cell?.textLabel?.text = "Ligne " + currentLine.code
+        cell?.imageView?.image = UIImage(named: self.imageNameForLineType(currentLine.type, code: currentLine.code)!)
         
-        return cell
+        return cell!
     }
 }

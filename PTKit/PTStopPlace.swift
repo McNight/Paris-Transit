@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-public struct PTStopPlace {
+public struct PTStopPlace: Equatable {
     public let identifier: Int
     public let name: String
     public let location: CLLocation
@@ -26,10 +26,10 @@ public struct PTStopPlace {
     }
 }
 
-func == (lhs: PTStopPlace, rhs: PTStopPlace) -> Bool {
+public func == (lhs: PTStopPlace, rhs: PTStopPlace) -> Bool {
     return ((lhs.identifier == rhs.identifier) && (lhs.name == rhs.name))
 }
 
-func != (lhs: PTStopPlace, rhs: PTStopPlace) -> Bool {
+public func != (lhs: PTStopPlace, rhs: PTStopPlace) -> Bool {
     return !(lhs == rhs)
 }

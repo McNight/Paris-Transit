@@ -11,6 +11,8 @@
 		D62CAA601BAAFF3300F41C5F /* LinesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		D62CAA621BAB01A500F41C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D62CAA611BAB01A500F41C5F /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		D62CAA641BAB078D00F41C5F /* TimetableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62CAA631BAB078D00F41C5F /* TimetableDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		D6791B1A1BAB339F009C20B3 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6791B181BAB339F009C20B3 /* DZNEmptyDataSet.framework */; };
+		D6791B1B1BAB339F009C20B3 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6791B191BAB339F009C20B3 /* SVProgressHUD.framework */; };
 		D6A58F7C1BA9DDFC002DF0DA /* RPStopPlaces.json in Resources */ = {isa = PBXBuildFile; fileRef = D6A58F7B1BA9DDFC002DF0DA /* RPStopPlaces.json */; };
 		D6C4CF031BA9A40B00795085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF021BA9A40B00795085 /* AppDelegate.swift */; };
 		D6C4CF0A1BA9A40B00795085 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C4CF081BA9A40B00795085 /* Main.storyboard */; };
@@ -30,7 +32,8 @@
 		D6C4CF5A1BA9CFAA00795085 /* PTLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF591BA9CFAA00795085 /* PTLocationManagerDelegate.swift */; };
 		D6C4CF601BA9D32600795085 /* PTPreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF5F1BA9D32600795085 /* PTPreferencesManager.swift */; };
 		D6C4CF661BA9D76800795085 /* TransitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF651BA9D76800795085 /* TransitViewController.swift */; };
-		D6C4CF681BA9DAAE00795085 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C4CF671BA9DAAE00795085 /* SettingsViewController.swift */; };
+		D6D4E7EC1BAC6502001ED3CA /* TimetableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D640623B1BAC619100666A0C /* TimetableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D6D4E7EE1BAC67F7001ED3CA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D4E7ED1BAC67F7001ED3CA /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesDataSource.swift; sourceTree = "<group>"; };
 		D62CAA611BAB01A500F41C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D62CAA631BAB078D00F41C5F /* TimetableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableDataSource.swift; sourceTree = "<group>"; };
+		D640623B1BAC619100666A0C /* TimetableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimetableViewCell.swift; path = "../Paris Transit/TimetableViewCell.swift"; sourceTree = "<group>"; };
+		D6791B181BAB339F009C20B3 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
+		D6791B191BAB339F009C20B3 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D6A58F7B1BA9DDFC002DF0DA /* RPStopPlaces.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RPStopPlaces.json; sourceTree = "<group>"; };
 		D6C4CEFF1BA9A40B00795085 /* Paris Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paris Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4CF021BA9A40B00795085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,7 +113,7 @@
 		D6C4CF591BA9CFAA00795085 /* PTLocationManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTLocationManagerDelegate.swift; sourceTree = "<group>"; };
 		D6C4CF5F1BA9D32600795085 /* PTPreferencesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTPreferencesManager.swift; sourceTree = "<group>"; };
 		D6C4CF651BA9D76800795085 /* TransitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitViewController.swift; sourceTree = "<group>"; };
-		D6C4CF671BA9DAAE00795085 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D6D4E7ED1BAC67F7001ED3CA /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +123,8 @@
 			files = (
 				D62CAA5C1BAAF96700F41C5F /* MapKit.framework in Frameworks */,
 				D6C4CF3E1BA9A42200795085 /* PTKit.framework in Frameworks */,
+				D6791B1A1BAB339F009C20B3 /* DZNEmptyDataSet.framework in Frameworks */,
+				D6791B1B1BAB339F009C20B3 /* SVProgressHUD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,16 +176,33 @@
 			isa = PBXGroup;
 			children = (
 				D6C4CF651BA9D76800795085 /* TransitViewController.swift */,
-				D6C4CF671BA9DAAE00795085 /* SettingsViewController.swift */,
+				D6D4E7ED1BAC67F7001ED3CA /* SettingsViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D66801E41BAC604B001AADAE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D6791B1D1BAB33EB009C20B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6791B181BAB339F009C20B3 /* DZNEmptyDataSet.framework */,
+				D6791B191BAB339F009C20B3 /* SVProgressHUD.framework */,
+				D62CAA5B1BAAF96700F41C5F /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D6C4CEF61BA9A40B00795085 = {
 			isa = PBXGroup;
 			children = (
 				D6C4CF011BA9A40B00795085 /* Paris Transit */,
-				D62CAA5B1BAAF96700F41C5F /* MapKit.framework */,
+				D6791B1D1BAB33EB009C20B3 /* Frameworks */,
 				D6C4CF181BA9A40C00795085 /* Paris TransitTests */,
 				D6C4CF2A1BA9A42200795085 /* PTKit */,
 				D6C4CF381BA9A42200795085 /* PTKitTests */,
@@ -201,6 +226,7 @@
 			children = (
 				D6C4CF021BA9A40B00795085 /* AppDelegate.swift */,
 				D62CAA651BAB099700F41C5F /* View Controllers */,
+				D66801E41BAC604B001AADAE /* Views */,
 				D6C4CF081BA9A40B00795085 /* Main.storyboard */,
 				D62CAA611BAB01A500F41C5F /* Assets.xcassets */,
 				D6C4CF0D1BA9A40B00795085 /* LaunchScreen.storyboard */,
@@ -253,7 +279,7 @@
 		D6C4CF501BA9C5DD00795085 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
-				D6C4CF5C1BA9D30900795085 /* Providers */,
+				D6C4CF4E1BA9A76200795085 /* PTRATPProvider.swift */,
 			);
 			name = Providers;
 			sourceTree = "<group>";
@@ -262,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				D6C4CF541BA9C7FC00795085 /* PTTimetable.swift */,
+				D640623B1BAC619100666A0C /* TimetableViewCell.swift */,
 			);
 			name = Timetable;
 			sourceTree = "<group>";
@@ -273,14 +300,6 @@
 				D6C4CF5E1BA9D31900795085 /* Managers */,
 			);
 			name = Managers;
-			sourceTree = "<group>";
-		};
-		D6C4CF5C1BA9D30900795085 /* Providers */ = {
-			isa = PBXGroup;
-			children = (
-				D6C4CF4E1BA9A76200795085 /* PTRATPProvider.swift */,
-			);
-			name = Providers;
 			sourceTree = "<group>";
 		};
 		D6C4CF5D1BA9D31100795085 /* Protocols */ = {
@@ -322,6 +341,7 @@
 				D6C4CEFC1BA9A40B00795085 /* Frameworks */,
 				D6C4CEFD1BA9A40B00795085 /* Resources */,
 				D6C4CF431BA9A42200795085 /* Embed Frameworks */,
+				D6791B1C1BAB33A9009C20B3 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -474,6 +494,25 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D6791B1C1BAB33A9009C20B3 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/DZNEmptyDataSet.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D6C4CEFB1BA9A40B00795085 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -481,7 +520,7 @@
 			files = (
 				D6C4CF661BA9D76800795085 /* TransitViewController.swift in Sources */,
 				D6C4CF031BA9A40B00795085 /* AppDelegate.swift in Sources */,
-				D6C4CF681BA9DAAE00795085 /* SettingsViewController.swift in Sources */,
+				D6D4E7EE1BAC67F7001ED3CA /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +545,7 @@
 				D6C4CF551BA9C7FC00795085 /* PTTimetable.swift in Sources */,
 				D6C4CF5A1BA9CFAA00795085 /* PTLocationManagerDelegate.swift in Sources */,
 				D62CAA601BAAFF3300F41C5F /* LinesDataSource.swift in Sources */,
+				D6D4E7EC1BAC6502001ED3CA /* TimetableViewCell.swift in Sources */,
 				D6C4CF4C1BA9A51500795085 /* PTStopPlace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,6 +691,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Paris Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -665,6 +709,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Paris Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

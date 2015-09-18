@@ -8,16 +8,16 @@
 
 import UIKit
 
-class TimetableDataSource: NSObject, UITableViewDataSource {
-    var timetable: PTTimetable!
+public class TimetableDataSource: NSObject, UITableViewDataSource {
+    public var timetable: PTTimetable!
     
     // MARK: - Table View Data Source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (section) {
         case 0:
             return self.timetable.firstDirectionResults.count
@@ -28,7 +28,7 @@ class TimetableDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let request = self.timetable.request
         let line = request.stopPlace.lines[request.lineIndex]
         
@@ -42,10 +42,10 @@ class TimetableDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("TimetableCell") as! TimetableViewCell
         
-        var timetableResult: PTTimetableResult
+        var timetableResult: PTTimetableResult!
         var text: String
         var detailText: String
         
@@ -63,8 +63,11 @@ class TimetableDataSource: NSObject, UITableViewDataSource {
             detailText = "?"
         }
         
-        cell.textLabel!.text = text
-        cell.detailTextLabel!.text = detailText
+        if let timetableResult = timetableResult {
+            cell.mainLabel!.text = text
+            cell.detailLabel!.text = timetableResult.patternIdentifier
+            cell.accessoryLabel!.text = detailText
+        }
         
         return cell
     }
