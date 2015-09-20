@@ -7,23 +7,92 @@
 //
 
 import UIKit
+import Accounts
+import Social
 
 class SettingsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.followVanadium()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Follow Twitter Stuff
+    
+    func followVanadium() {
+        let account = ACAccountStore()
+        let twitterAccountType = account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+    
+        account.requestAccessToAccountsWithType(twitterAccountType, options: nil) { (success, error) -> Void in
+            if success {
+                let allAcounts = account.accountsWithAccountType(twitterAccountType)
+                
+                if allAcounts.count > 0 {
+                    let twitterAccount = allAcounts.last as! ACAccount // On devrait plutôt afficher tous les comptes et laisser le user choisir
+                    
+                    // ALREADY FOLLOWING VERIFICATION
+                    
+                    let paramsVerif = [  "screen_name" : "AdaMcNight" ]
+                    let requestURLVerif = NSURL(string: "https://api.twitter.com/1.1/users/show.json")
+                    
+                    let getRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: requestURLVerif, parameters: paramsVerif)
+                    
+                    getRequest.account = twitterAccount
+                    
+                    getRequest.performRequestWithHandler({ (data, response, error) -> Void in
+                        if let error = error {
+                            print("Error : \(error.localizedDescription)")
+                        } else {
+                            do {
+                                let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! [String : AnyObject]
+                                let following = json["following"] as! Bool
+                                
+                                if following {
+                                    print("Vous me suivez déjà. Merci !")
+                                }
+                                else {
+                                    let params = [  "screen_name" : "AdaMcNight",
+                                        "follow" : true]
+                                    let requestURL = NSURL(string: "https://api.twitter.com/1.1/friendships/create.json")
+                                    
+                                    let postRequest = SLRequest(forServiceType: SLServiceTypeTwitter,
+                                        requestMethod: .POST, URL: requestURL, parameters: params)
+                                    
+                                    postRequest.account = twitterAccount
+                                    
+                                    postRequest.performRequestWithHandler({ (data, response, error) -> Void in
+                                        if let error = error {
+                                            print("Error : \(error.localizedDescription)")
+                                        } else {
+                                            if response.statusCode == 200 {
+                                                print("Merci !")
+                                            } else {
+                                                print("Oops !")
+                                            }
+                                        }
+                                    })
+                                }
+                            } catch let error as NSError {
+                                print("Error parsing : \(error.localizedDescription)")
+                            }
+                        }
+                    })
+                }
+                else {
+                    print("Aucun compte Twitter !")
+                }
+            } else {
+                print("Error : \(error.localizedDescription)")
+            }
+        }
+    }
+
 
     // MARK: - Table view data source
 
