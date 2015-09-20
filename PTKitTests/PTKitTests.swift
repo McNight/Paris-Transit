@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import PTKit
+import CoreLocation
 
 class PTKitTests: XCTestCase {
     
@@ -22,6 +23,30 @@ class PTKitTests: XCTestCase {
     }
     
     func testNonNilRATPProvider() {
-        XCTAssertNotNil(PTRATPProvider.sharedProvider, "A provider cannot return a nil value")
+        XCTAssertNotNil(PTRATPProvider.sharedProvider, "A provider cannot return a nil sharedProvider")
+    }
+    
+    func testNonNilLocationManager() {
+        XCTAssertNotNil(PTLocationManager.sharedManager, "A location manager cannot be nil")
+    }
+    
+    func testNonNilPreferencesManager() {
+        XCTAssertNotNil(PTPreferencesManager.sharedManager, "A preferences manager cannot be nil")
+    }
+    
+    func testStopPlacesEquality() {
+        let stopPlace1 = PTStopPlace(identifier: 1, name: "Super Stop Place", location: CLLocation(), lines: [], distance: 250)
+        let stopPlace2 = PTStopPlace(identifier: 1, name: "Super Stop Place", location: CLLocation(), lines: [], distance: 250)
+        
+        XCTAssertEqual(stopPlace1, stopPlace2, "Stop Places with same identifier and same name should be considered equal")
+    }
+    
+    func testStopPlacesNonEquality() {
+        let stopPlace1 = PTStopPlace(identifier: 1, name: "Super Stop Place", location: CLLocation(), lines: [], distance: 250)
+        let stopPlace2 = PTStopPlace(identifier: 2, name: "Super Stop Place", location: CLLocation(), lines: [], distance: 250)
+        let stopPlace3 = PTStopPlace(identifier: 2, name: "Amazing Stop Place", location: CLLocation(), lines: [], distance: 250)
+        
+        XCTAssertNotEqual(stopPlace1, stopPlace2, "Stop Places with different identifiers or different names shouldn't be considered equal")
+        XCTAssertNotEqual(stopPlace2, stopPlace3, "Stop Places with different identifiers or different names shouldn't be considered equal")
     }
 }

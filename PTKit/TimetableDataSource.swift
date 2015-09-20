@@ -43,7 +43,13 @@ public class TimetableDataSource: NSObject, UITableViewDataSource {
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TimetableCell") as! TimetableViewCell
+        var cell: UITableViewCell
+        
+        if self.timetable.request.stopPlace.lines[self.timetable.request.lineIndex].type == 1 {
+            cell = tableView.dequeueReusableCellWithIdentifier("RightDetailCell")!
+        } else {
+            cell = tableView.dequeueReusableCellWithIdentifier("TimetableCell") as! TimetableViewCell
+        }
         
         var timetableResult: PTTimetableResult!
         var text: String
@@ -55,7 +61,7 @@ public class TimetableDataSource: NSObject, UITableViewDataSource {
             text = timetableResult.stopInStation ? timetableResult.destination : "\(timetableResult.destination) (sans arrêt)"
             detailText = "\(timetableResult.waitingTime / 60) min"
         case 1:
-            timetableResult = self.timetable.firstDirectionResults[indexPath.row]
+            timetableResult = self.timetable.secondDirectionResults[indexPath.row]
             text = timetableResult.stopInStation ? timetableResult.destination : "\(timetableResult.destination) (sans arrêt)"
             detailText = "\(timetableResult.waitingTime / 60) min"
         default:
@@ -64,9 +70,14 @@ public class TimetableDataSource: NSObject, UITableViewDataSource {
         }
         
         if let timetableResult = timetableResult {
-            cell.mainLabel!.text = text
-            cell.detailLabel!.text = timetableResult.patternIdentifier
-            cell.accessoryLabel!.text = detailText
+            if let cell = cell as? TimetableViewCell {
+                cell.mainLabel!.text = text
+                cell.detailLabel!.text = timetableResult.patternIdentifier
+                cell.accessoryLabel!.text = detailText
+            } else {
+                cell.textLabel!.text = text
+                cell.detailTextLabel!.text = detailText
+            }
         }
         
         return cell

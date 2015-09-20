@@ -26,16 +26,16 @@ public class LinesDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    public func filteredStopPlace(stopPlace: PTStopPlace, lineTypes: [Int]) -> PTStopPlace {
-        var lines = stopPlace.lines
+    public func filteredStopPlace(stopToFilter: PTStopPlace, lineTypes: [Int]) -> PTStopPlace {
+        var lines = [PTLine]()
         
-        for (index, line) in lines.enumerate() {
-            if lineTypes.contains(line.type) == false {
-                lines.removeAtIndex(index)
+        for (_, line) in stopToFilter.lines.enumerate() {
+            if lineTypes.contains(line.type) {
+                lines.append(line)
             }
         }
         
-        let filteredStopPlace = PTStopPlace(identifier: stopPlace.identifier, name: stopPlace.name, location: stopPlace.location, lines: lines, distance: stopPlace.distance)
+        let filteredStopPlace = PTStopPlace(identifier: stopToFilter.identifier, name: stopToFilter.name, location: stopToFilter.location, lines: lines, distance: stopToFilter.distance)
         return filteredStopPlace
     }
     

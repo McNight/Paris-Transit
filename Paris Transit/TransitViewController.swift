@@ -12,9 +12,13 @@ import CoreLocation
 import MapKit
 import DZNEmptyDataSet
 
-class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PTLocationManagerDelegate {
+class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PTLocationManagerDelegate {
     var nearestStopPlace: PTStopPlace!
-    var nearbyStopPlaces: [PTStopPlace]!
+    var nearbyStopPlaces: [PTStopPlace]! {
+        didSet (newValue) {
+            nearestStopPlace = self.nearbyStopPlaces.first!
+        }
+    }
     
     lazy private var distanceFormatter = MKDistanceFormatter()
     
@@ -22,6 +26,11 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
     lazy private var timetableDataSource = TimetableDataSource()
     
     lazy private var allowedLineTypes = [1,2]
+    
+    private var selectedLineIndex = 0
+    private var selectedStopPlace: PTStopPlace?
+    
+    private var failureReason: String?
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var linesTableView: UITableView!
@@ -45,6 +54,7 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
         // Empty Data Sets
         self.linesTableView.emptyDataSetSource = self
         self.linesTableView.emptyDataSetDelegate = self
+        self.linesTableView.delegate = self
         self.timetablesTableView.emptyDataSetSource = self
         self.timetablesTableView.emptyDataSetDelegate = self
         
@@ -52,13 +62,14 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
         self.linesTableView.tableFooterView = UIView()
         self.timetablesTableView.tableFooterView = UIView()
         
-        // MapView
-        self.mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
-        
         // Scroll Views Content Insets
         let tabbarInset = UIEdgeInsets(top: 0, left: 0, bottom: CGRectGetHeight(self.tabBarController!.tabBar.frame), right: 0)
         self.timetablesTableView.contentInset = tabbarInset
         self.timetablesTableView.scrollIndicatorInsets = tabbarInset
+        
+        let navbarInset = UIEdgeInsets(top: 0, left: 0, bottom: -CGRectGetHeight(self.navigationController!.navigationBar.frame), right: 0)
+        self.linesTableView.contentInset = navbarInset
+        self.linesTableView.scrollIndicatorInsets = navbarInset
     }
     
     private func displayStopPins() {
@@ -66,10 +77,16 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
         
         for stopPlace in self.nearbyStopPlaces
         {
-            let stopPlaceAnnotation = MKPointAnnotation()
+            let stopPlaceAnnotation = MKPointAnnotation() // On peut éventuellement la subclasse et stocker la stopPlace avec !
             stopPlaceAnnotation.coordinate = stopPlace.location.coordinate
             stopPlaceAnnotation.title = stopPlace.name
-            stopPlaceAnnotation.subtitle = "\(self.distanceFormatter.stringFromDistance(stopPlace.distance)) - \(stopPlace.lines.count) lignes"
+            
+            var subtitle = "\(self.distanceFormatter.stringFromDistance(stopPlace.distance)) - \(stopPlace.lines.count) ligne"
+            if stopPlace.lines.count > 1 {
+                subtitle += "s"
+            }
+
+            stopPlaceAnnotation.subtitle = subtitle
             stopPlacesAnnotations.append(stopPlaceAnnotation)
         }
         
@@ -77,21 +94,22 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
     }
     
     private func stopPlacePinSelectedFromMapView(stopPlace: PTStopPlace) {
+        self.selectedStopPlace = stopPlace
         self.populateLinesTableView(stopPlace)
-        self.timetableRequestWithStopPlace(stopPlace, lineIndex: 0) // À changer le lineIndex avec un index en property !
+        self.timetableRequestWithStopPlace(stopPlace, lineIndex: self.selectedLineIndex)
     }
 
     // MARK: - Data
     
     func getStopPlacesNearUsersLocation(location: CLLocation) {
-        PTRATPProvider.sharedProvider.loadAndfilterStopPlaces(location, radius: 2000, lineTypes: self.allowedLineTypes, completionHandler: { (filteredStopPlaces) -> () in
+        PTRATPProvider.sharedProvider.loadAndfilterStopPlaces(location, radius: 1000, lineTypes: self.allowedLineTypes, completionHandler: { (filteredStopPlaces) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 if let filteredStopPlaces = filteredStopPlaces {
                     self.nearbyStopPlaces = filteredStopPlaces
-                    self.nearestStopPlace = self.nearbyStopPlaces.first!
-                    self.populateLinesTableView(self.nearestStopPlace)
+                    self.selectedStopPlace = self.nearestStopPlace
+                    self.populateLinesTableView(self.selectedStopPlace!)
                     self.timetablesTableView.reloadData()
-                    self.timetableRequestWithStopPlace(self.nearestStopPlace, lineIndex: 0)
+                    self.timetableRequestWithStopPlace(self.selectedStopPlace!, lineIndex: self.selectedLineIndex)
                     self.displayStopPins()
                 }
             })
@@ -111,12 +129,18 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        ratpProvider.getStopTimetableWithRequest(timetableRequest, limit: 3) { (timetable) -> Void in
+        ratpProvider.getStopTimetableWithRequest(timetableRequest, limit: 2) { (timetable) -> Void in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
             if let timetable = timetable {
-                self.timetableDataSource.timetable = timetable
-                self.timetablesTableView.dataSource = self.timetableDataSource
+                if timetable.firstDirectionResults == nil || timetable.secondDirectionResults == nil {
+                    self.timetablesTableView.dataSource = nil
+                    self.failureReason = "Horaires indisponible !"
+                } else {
+                    self.failureReason = nil
+                    self.timetableDataSource.timetable = timetable
+                    self.timetablesTableView.dataSource = self.timetableDataSource
+                }
                 self.timetablesTableView.reloadData()
             }
         }
@@ -150,6 +174,15 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
         }
     }
     
+    // MARK: - UITableViewDelegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("Selected !")
+        self.selectedLineIndex = indexPath.row
+        self.timetableRequestWithStopPlace(self.selectedStopPlace!, lineIndex: self.selectedLineIndex)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     // MARK: - DZNEmptyDataSetSource
     
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
@@ -167,10 +200,14 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
         } else {
             var text: String
             
-            if self.nearestStopPlace == nil {
-                text = "Récupération de la position GPS..."
+            if failureReason != nil {
+                text = failureReason!
             } else {
-                text = "Récupération des horaires..."
+                if self.nearestStopPlace == nil {
+                    text = "Récupération de la position GPS..."
+                } else {
+                    text = "Récupération des horaires..."
+                }
             }
             
             let attribs = [
@@ -188,10 +225,14 @@ class TransitViewController: UIViewController, MKMapViewDelegate, DZNEmptyDataSe
         } else {
             var text: String
             
-            if self.nearestStopPlace == nil {
-                text = "Elle sert à repérer les arrêts et les lignes les plus proches de votre position."
+            if failureReason != nil {
+                text = "Impossible de récupérer les horaires pour cette ligne."
             } else {
-                text = "Horaires pour l'arrêt \(self.nearestStopPlace.name) en téléchargement..."
+                if self.nearestStopPlace == nil {
+                    text = "Elle sert à repérer les arrêts et les lignes les plus proches de votre position."
+                } else {
+                    text = "Horaires pour l'arrêt \(self.nearestStopPlace.name) en téléchargement..."
+                }
             }
             
             let para = NSMutableParagraphStyle()

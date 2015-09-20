@@ -15,7 +15,7 @@ public class PTRATPProvider {
     private let PTStopPlacesFileName = "RPStopPlaces"
     private let PTRATPTimetableURL: NSString = "http://apixha.ixxi.net/APIX?keyapp=mPnXzdqWEI0EFvmlgJv9&withDetails=true&stopArea=%d&cmd=getNextStopsRealtime&apixFormat=json&line=%d&withText=true&direction=%d"
     
-    private var stopPlaces = [Int : PTStopPlace]()
+    public var stopPlaces = [Int : PTStopPlace]()
     
     public func loadAndfilterStopPlaces(location: CLLocation, radius: CLLocationDistance, lineTypes: [Int], completionHandler: ([PTStopPlace]?) -> ()) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
@@ -101,6 +101,9 @@ public class PTRATPProvider {
         let firstRATPTimetableURL = NSString(format: self.PTRATPTimetableURL, stopPlace.identifier, lineIdentifier, firstDirectionIdentifier)
         let secondRATPTimetableURL = NSString(format: self.PTRATPTimetableURL, stopPlace.identifier, lineIdentifier, secondDirectionIdentifier)
         
+        // print("URL 1 : \(firstRATPTimetableURL)")
+        // print("URL 2 : \(secondRATPTimetableURL)")
+        
         let firstURL = NSURL(string: String(firstRATPTimetableURL))
         let secondURL = NSURL(string: String(secondRATPTimetableURL))
         
@@ -177,7 +180,7 @@ public class PTRATPProvider {
             for nextStop in nextStops! as! [[String : AnyObject]] {
                 if displayNonStoppingTrains || nextStop["bStopInStation"]!.boolValue! {
                     let destination = nextStop["destinationName"] as! String
-                    let patternIdentifier = nextStop["servicePatternId"] as! String
+                    let patternIdentifier = nextStop["servicePatternId"] as? String
                     let stopInStation = nextStop["bStopInStation"] as! Bool
                     let waitingTime = nextStop["waitingTime"] as! Int
                     let passingHour = nextStop["waitingTimeRaw"] as! String

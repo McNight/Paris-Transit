@@ -20,7 +20,7 @@ public struct PTTimetableRequest {
 
 public struct PTTimetableResult {
     public let destination: String
-    public let patternIdentifier: String
+    public let patternIdentifier: String?
     public let stopInStation: Bool
     public let waitingTime: Int
     public let passingHour: String
