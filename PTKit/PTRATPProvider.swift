@@ -101,9 +101,6 @@ public class PTRATPProvider {
         let firstRATPTimetableURL = NSString(format: self.PTRATPTimetableURL, stopPlace.identifier, lineIdentifier, firstDirectionIdentifier)
         let secondRATPTimetableURL = NSString(format: self.PTRATPTimetableURL, stopPlace.identifier, lineIdentifier, secondDirectionIdentifier)
         
-        // print("URL 1 : \(firstRATPTimetableURL)")
-        // print("URL 2 : \(secondRATPTimetableURL)")
-        
         let firstURL = NSURL(string: String(firstRATPTimetableURL))
         let secondURL = NSURL(string: String(secondRATPTimetableURL))
         
@@ -117,6 +114,9 @@ public class PTRATPProvider {
             }
             else
             {
+                let newResponse = response as! NSHTTPURLResponse
+                print("Status Code : \(newResponse.statusCode)")
+                
                 self.parseTimetableData(data!, request: request, limit: limit, completionHandler: { (firstResults: [PTTimetableResult]?) -> Void in
                     let secondDataTask = session.dataTaskWithURL(secondURL!, completionHandler: { (data, response, error) -> Void in
                         if let error = error
@@ -166,6 +166,13 @@ public class PTRATPProvider {
         do {
             let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
             let nextStopsOnLine = json.objectForKey("nextStopsOnLines") as? NSArray
+            
+            guard nextStopsOnLine != nil else {
+                print("NIL Next Stops On Line")
+                completionHandler(nil)
+                return
+            }
+            
             let temp = nextStopsOnLine?.firstObject as? NSDictionary
             let nextStops = temp?.objectForKey("nextStops") as? NSArray
             
@@ -173,19 +180,31 @@ public class PTRATPProvider {
                 completionHandler(nil)
                 return
             }
-            
+
             var results = [PTTimetableResult]()
             let displayNonStoppingTrains = PTPreferencesManager.sharedManager.displayNonStoppingTrains()
             
             for nextStop in nextStops! as! [[String : AnyObject]] {
                 if displayNonStoppingTrains || nextStop["bStopInStation"]!.boolValue! {
-                    let destination = nextStop["destinationName"] as! String
-                    let patternIdentifier = nextStop["servicePatternId"] as? String
+                    var destination = nextStop["destinationName"] as? String
+                    var patternIdentifier = nextStop["servicePatternId"] as? String
                     let stopInStation = nextStop["bStopInStation"] as! Bool
                     let waitingTime = nextStop["waitingTime"] as! Int
-                    let passingHour = nextStop["waitingTimeRaw"] as! String
+                    var passingHour = nextStop["waitingTimeRaw"] as? String
                     
-                    let result = PTTimetableResult(destination: destination, patternIdentifier: patternIdentifier, stopInStation: stopInStation, waitingTime: waitingTime, passingHour: passingHour)
+                    if destination == nil {
+                        destination = "???"
+                    }
+                    
+                    if patternIdentifier == nil {
+                        patternIdentifier = "???"
+                    }
+                    
+                    if passingHour == nil {
+                        passingHour = "???"
+                    }
+                    
+                    let result = PTTimetableResult(destination: destination!, patternIdentifier: patternIdentifier, stopInStation: stopInStation, waitingTime: waitingTime, passingHour: passingHour!)
                     results.append(result)
                     
                     if (results.count == limit) {

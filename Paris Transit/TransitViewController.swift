@@ -15,7 +15,7 @@ import DZNEmptyDataSet
 class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PTLocationManagerDelegate {
     var nearestStopPlace: PTStopPlace!
     var nearbyStopPlaces: [PTStopPlace]! {
-        didSet (newValue) {
+        didSet {
             nearestStopPlace = self.nearbyStopPlaces.first!
         }
     }
@@ -26,6 +26,15 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     lazy private var timetableDataSource = TimetableDataSource()
     
     lazy private var allowedLineTypes = [1,2]
+    
+    private var refreshTimer: NSTimer!
+    private var lastTimetableRequest: PTTimetableRequest! {
+        didSet {
+            if oldValue == nil {
+                self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "refreshCurrentTimetableFromTimer", userInfo: nil, repeats: true)
+            }
+        }
+    }
     
     private var selectedLineIndex = 0
     private var selectedStopPlace: PTStopPlace?
@@ -70,6 +79,11 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
         let navbarInset = UIEdgeInsets(top: 0, left: 0, bottom: -CGRectGetHeight(self.navigationController!.navigationBar.frame), right: 0)
         self.linesTableView.contentInset = navbarInset
         self.linesTableView.scrollIndicatorInsets = navbarInset
+        
+        // Refresh Control
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshTimetable:", forControlEvents: .ValueChanged)
+        self.timetablesTableView.addSubview(refreshControl)
     }
     
     private func displayStopPins() {
@@ -81,8 +95,10 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
             stopPlaceAnnotation.coordinate = stopPlace.location.coordinate
             stopPlaceAnnotation.title = stopPlace.name
             
-            var subtitle = "\(self.distanceFormatter.stringFromDistance(stopPlace.distance)) - \(stopPlace.lines.count) ligne"
-            if stopPlace.lines.count > 1 {
+            let numberOfSupportedLines = self.linesDataSource.numberOfSupportedLines(stopPlace, lineTypes: self.allowedLineTypes)
+            
+            var subtitle = "\(self.distanceFormatter.stringFromDistance(stopPlace.distance)) - \(numberOfSupportedLines) ligne"
+            if numberOfSupportedLines > 1 {
                 subtitle += "s"
             }
 
@@ -124,12 +140,17 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     }
     
     func timetableRequestWithStopPlace(stopPlace: PTStopPlace, lineIndex: Int) {
-        let timetableRequest = PTTimetableRequest(stopPlace: stopPlace, lineIndex: lineIndex)
-        let ratpProvider = PTRATPProvider.sharedProvider
+        if let timetableRequest = self.lastTimetableRequest {
+            if stopPlace != timetableRequest.stopPlace || lineIndex != timetableRequest.lineIndex {
+                self.lastTimetableRequest = PTTimetableRequest(stopPlace: stopPlace, lineIndex: lineIndex)
+            }
+        } else {
+            self.lastTimetableRequest = PTTimetableRequest(stopPlace: stopPlace, lineIndex: lineIndex)
+        }
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        ratpProvider.getStopTimetableWithRequest(timetableRequest, limit: 2) { (timetable) -> Void in
+        PTRATPProvider.sharedProvider.getStopTimetableWithRequest(self.lastTimetableRequest, limit: 2) { (timetable) -> Void in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
             if let timetable = timetable {
@@ -144,6 +165,19 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
                 self.timetablesTableView.reloadData()
             }
         }
+    }
+    
+    func refreshCurrentTimetableFromTimer() {
+        print("Refresh from Timer")
+        self.timetableRequestWithStopPlace(self.lastTimetableRequest.stopPlace, lineIndex: self.lastTimetableRequest.lineIndex)
+    }
+    
+    func refreshTimetable(refreshControl: UIRefreshControl) {
+        print("Refresh from UIRefreshControl")
+        self.timetableRequestWithStopPlace(self.lastTimetableRequest.stopPlace, lineIndex: self.lastTimetableRequest.lineIndex)
+        self.refreshTimer.invalidate()
+        self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "refreshCurrentTimetableFromTimer", userInfo: nil, repeats: true)
+        refreshControl.endRefreshing()
     }
     
     // MARK: - Location
@@ -178,8 +212,13 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("Selected !")
+        
+        self.timetablesTableView.dataSource = nil
+        self.timetablesTableView.reloadData()
+        
         self.selectedLineIndex = indexPath.row
         self.timetableRequestWithStopPlace(self.selectedStopPlace!, lineIndex: self.selectedLineIndex)
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -226,12 +265,12 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
             var text: String
             
             if failureReason != nil {
-                text = "Impossible de récupérer les horaires pour cette ligne."
+                text = "Impossible de récupérer les horaires. Cela provient peut être d'une erreur de communication, d'absence de trains ou d'une ligne non gérée."
             } else {
                 if self.nearestStopPlace == nil {
                     text = "Elle sert à repérer les arrêts et les lignes les plus proches de votre position."
                 } else {
-                    text = "Horaires pour l'arrêt \(self.nearestStopPlace.name) en téléchargement..."
+                    text = "Horaires pour l'arrêt \(self.selectedStopPlace!.name) en téléchargement..."
                 }
             }
             

@@ -108,6 +108,7 @@
                                                         <constraint firstAttribute="trailingMargin" secondItem="cEl-9v-zI0" secondAttribute="trailing" constant="7" id="nXG-37-S3Z"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <outlet property="accessoryLabel" destination="cEl-9v-zI0" id="rQH-6K-dKI"/>
                                                     <outlet property="detailLabel" destination="bNB-M6-wDa" id="eCD-pZ-jhx"/>
@@ -199,7 +200,7 @@
                         <sections>
                             <tableViewSection headerTitle="Transit" id="ONK-GR-G0K">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="OlI-7U-udJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="OlI-7U-udJ">
                                         <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OlI-7U-udJ" id="lg0-P7-mfH">
@@ -228,17 +229,17 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FfG-8x-neM">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="FfG-8x-neM">
                                         <rect key="frame" x="0.0" y="158" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FfG-8x-neM" id="mWB-4z-hoZ">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Afficher les arrêts dans un rayon de..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YsI-4m-bu8">
-                                                    <rect key="frame" x="15" y="0.0" width="300" height="43"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Rayon d'affichage des arrêts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YsI-4m-bu8">
+                                                    <rect key="frame" x="15" y="0.0" width="240" height="43"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="kdn-MZ-Kcf"/>
+                                                        <constraint firstAttribute="width" constant="240" id="kdn-MZ-Kcf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -266,7 +267,29 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="À propos" id="K6Y-9U-Ozq">
-                                <cells/>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="PE2-hf-4VD" imageView="I9f-hi-TTz" style="IBUITableViewCellStyleDefault" id="Z2b-VZ-ZsP">
+                                        <rect key="frame" x="0.0" y="253" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z2b-VZ-ZsP" id="Dsm-co-1R9">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Me suivre sur Twitter (@AdaMcNight)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PE2-hf-4VD">
+                                                    <rect key="frame" x="46" y="0.0" width="539" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="twitter" id="I9f-hi-TTz">
+                                                    <rect key="frame" x="15" y="13" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
                             </tableViewSection>
                         </sections>
                         <connections>
@@ -275,6 +298,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Réglages" id="8hK-Da-KBR"/>
+                    <connections>
+                        <outlet property="followTwitterCell" destination="Z2b-VZ-ZsP" id="wlX-jK-M7j"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNY-N4-BbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -303,5 +329,6 @@
     <resources>
         <image name="Settings" width="32" height="32"/>
         <image name="Transit" width="32" height="32"/>
+        <image name="twitter" width="16" height="16"/>
     </resources>
 </document>

@@ -9,13 +9,16 @@
 import UIKit
 import Accounts
 import Social
+import SVProgressHUD
 
 class SettingsViewController: UITableViewController {
 
+    @IBOutlet weak var followTwitterCell: UITableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.followVanadium()
+        self.twitterVerifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,7 +28,7 @@ class SettingsViewController: UITableViewController {
     
     // MARK: - Follow Twitter Stuff
     
-    func followVanadium() {
+    func twitterVerifications() {
         let account = ACAccountStore()
         let twitterAccountType = account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
     
@@ -36,63 +39,100 @@ class SettingsViewController: UITableViewController {
                 if allAcounts.count > 0 {
                     let twitterAccount = allAcounts.last as! ACAccount // On devrait plutôt afficher tous les comptes et laisser le user choisir
                     
-                    // ALREADY FOLLOWING VERIFICATION
-                    
-                    let paramsVerif = [  "screen_name" : "AdaMcNight" ]
-                    let requestURLVerif = NSURL(string: "https://api.twitter.com/1.1/users/show.json")
-                    
-                    let getRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: requestURLVerif, parameters: paramsVerif)
-                    
-                    getRequest.account = twitterAccount
-                    
-                    getRequest.performRequestWithHandler({ (data, response, error) -> Void in
-                        if let error = error {
-                            print("Error : \(error.localizedDescription)")
-                        } else {
-                            do {
-                                let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! [String : AnyObject]
-                                let following = json["following"] as! Bool
-                                
-                                if following {
-                                    print("Vous me suivez déjà. Merci !")
-                                }
-                                else {
-                                    let params = [  "screen_name" : "AdaMcNight",
-                                        "follow" : true]
-                                    let requestURL = NSURL(string: "https://api.twitter.com/1.1/friendships/create.json")
-                                    
-                                    let postRequest = SLRequest(forServiceType: SLServiceTypeTwitter,
-                                        requestMethod: .POST, URL: requestURL, parameters: params)
-                                    
-                                    postRequest.account = twitterAccount
-                                    
-                                    postRequest.performRequestWithHandler({ (data, response, error) -> Void in
-                                        if let error = error {
-                                            print("Error : \(error.localizedDescription)")
-                                        } else {
-                                            if response.statusCode == 200 {
-                                                print("Merci !")
-                                            } else {
-                                                print("Oops !")
-                                            }
-                                        }
-                                    })
-                                }
-                            } catch let error as NSError {
-                                print("Error parsing : \(error.localizedDescription)")
-                            }
+                    self.doYouFollowVanadiumVerification(twitterAccount, completionHandler: { (follow) -> Void in
+                        if follow {
+                            self.followTwitterCell.textLabel!.text = "Merci de me suivre sur Twitter !"
+                        }
+                        else {
+                            self.followVanadium(twitterAccount)
                         }
                     })
                 }
                 else {
                     print("Aucun compte Twitter !")
                 }
-            } else {
-                print("Error : \(error.localizedDescription)")
+            }
+            else {
+                print("Access denied !")
             }
         }
     }
+    
+    func doYouFollowVanadiumVerification(account: ACAccount, completionHandler: (follow: Bool) -> Void) {
+        let paramsVerif = [  "screen_name" : "AdaMcNight" ]
+        let requestURLVerif = NSURL(string: "https://api.twitter.com/1.1/users/show.json")
+        
+        let getRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: requestURLVerif, parameters: paramsVerif)
+        
+        getRequest.account = account
+        
+        getRequest.performRequestWithHandler { (data, response, error) -> Void in
+            if let error = error {
+                print("Error : \(error.localizedDescription)")
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(follow: false)
+                }
+            }
+            else {
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! [String : AnyObject]
+                    let following = json["following"] as! Bool
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completionHandler(follow: following)
+                    }
+                } catch let error as NSError {
+                    print("Error parsing : \(error.localizedDescription)")
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completionHandler(follow: false)
+                    }
+                }
+            }
+        }
+    }
+    
+    func followVanadium(account: ACAccount) {
+        let params = [  "screen_name" : "AdaMcNight",
+            "follow" : true]
+        let requestURL = NSURL(string: "https://api.twitter.com/1.1/friendships/create.json")
+        
+        let postRequest = SLRequest(forServiceType: SLServiceTypeTwitter,
+            requestMethod: .POST, URL: requestURL, parameters: params)
+        
+        postRequest.account = account
+        
+        postRequest.performRequestWithHandler({ (data, response, error) -> Void in
+            if let error = error
+            {
+                self.showErrorWithStatus("Oops... Erreur : \(error.localizedDescription)")
+            }
+            else
+            {
+                if response.statusCode == 200
+                {
+                    self.showSuccessWithStatus("Merci !")
+                }
+                else
+                {
+                    self.showErrorWithStatus("Oops... Erreur ! (Code \(response.statusCode))")
+                }
+            }
+        })
+    }
+    
+    private func showSuccessWithStatus(status: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            SVProgressHUD.showSuccessWithStatus(status)
+        }
+    }
 
+    private func showErrorWithStatus(status: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            SVProgressHUD.showErrorWithStatus(status)
+        }
+    }
 
     // MARK: - Table view data source
 

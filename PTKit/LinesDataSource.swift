@@ -39,6 +39,18 @@ public class LinesDataSource: NSObject, UITableViewDataSource {
         return filteredStopPlace
     }
     
+    public func numberOfSupportedLines(stopToCount: PTStopPlace, lineTypes: [Int]) -> Int {
+        var count = 0
+        
+        for (_, line) in stopToCount.lines.enumerate() {
+            if lineTypes.contains(line.type) {
+                count++
+            }
+        }
+        
+        return count
+    }
+    
     // MARK: - Table View Data Source
     
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
