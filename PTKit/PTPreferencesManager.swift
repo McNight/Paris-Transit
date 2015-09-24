@@ -15,7 +15,9 @@ public class PTPreferencesManager {
     
     private let PTAlreadyLaunchedPreferencesKey = "PTAlreadyLaunchedPreferencesKey"
     private let PTDisplayNonStoppingTrainsPreferencesKey = "PTDisplayNonStoppingTrainsPreferencesKey"
+    private let PTRadiusStopPlacesPreferencesKey = "PTRadiusStopPlacesPreferencesKey"
     private let PTTwitterAccessAskedPreferencesKey = "PTTwitterAccessAskedPreferencesKey"
+    private let PTTwitterUsersFollowUsPreferencesKey = "PTTwitterUsersFollowUsPreferencesKey"
     
     public func alreadyLaunchedVerification() -> Bool {
         let alreadyLaunched = self.usersDefaults.boolForKey(PTAlreadyLaunchedPreferencesKey)
@@ -33,7 +35,9 @@ public class PTPreferencesManager {
     
     private func defaultSettingsRegistration() {
         self.usersDefaults.setBool(false, forKey: PTDisplayNonStoppingTrainsPreferencesKey)
+        self.usersDefaults.setDouble(500, forKey: PTRadiusStopPlacesPreferencesKey)
         self.usersDefaults.setBool(false, forKey: PTTwitterAccessAskedPreferencesKey)
+        self.usersDefaults.setBool(false, forKey: PTTwitterUsersFollowUsPreferencesKey)
     }
     
     public func displayNonStoppingTrains() -> Bool {
@@ -45,12 +49,30 @@ public class PTPreferencesManager {
         self.usersDefaults.synchronize()
     }
     
+    public func radiusStopPlaces() -> Double {
+        return self.usersDefaults.doubleForKey(PTRadiusStopPlacesPreferencesKey)
+    }
+
+    public func setRadiusStopPlaces(newValue: Double) {
+        self.usersDefaults.setDouble(newValue, forKey: PTRadiusStopPlacesPreferencesKey)
+        self.usersDefaults.synchronize()
+    }
+    
     public func twitterAccessAsked() -> Bool {
         return self.usersDefaults.boolForKey(PTTwitterAccessAskedPreferencesKey)
     }
     
     public func setTwitterAccessAsked(newValue: Bool) {
         self.usersDefaults.setBool(newValue, forKey: PTTwitterAccessAskedPreferencesKey)
+        self.usersDefaults.synchronize()
+    }
+    
+    public func doesUserFollowUs() -> Bool {
+        return self.usersDefaults.boolForKey(PTTwitterUsersFollowUsPreferencesKey)
+    }
+    
+    public func setUserFollowUs(newValue: Bool) {
+        self.usersDefaults.setBool(newValue, forKey: PTTwitterUsersFollowUsPreferencesKey)
         self.usersDefaults.synchronize()
     }
 }

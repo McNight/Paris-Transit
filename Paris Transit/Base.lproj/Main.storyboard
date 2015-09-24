@@ -177,6 +177,7 @@
                     <connections>
                         <outlet property="linesTableView" destination="8FR-9w-mD2" id="kKh-t8-b3T"/>
                         <outlet property="mapView" destination="3sq-Pw-AGO" id="xMi-CM-syF"/>
+                        <outlet property="refreshBarButtonItem" destination="rJu-Uv-l3a" id="8Qc-jW-JBU"/>
                         <outlet property="timetablesTableView" destination="mrE-Wu-6Ha" id="eZ0-GR-mfb"/>
                     </connections>
                 </viewController>
@@ -207,12 +208,12 @@
         <scene sceneID="FWb-QE-KON">
             <objects>
                 <tableViewController id="ca8-wT-0Oo" customClass="SettingsViewController" customModule="Paris_Transit" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="PeO-83-rJZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="PeO-83-rJZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="Transit" id="ONK-GR-G0K">
+                            <tableViewSection headerTitle="Transit" footerTitle="Augmentez avec la distance de recherche des arrêts par rapport à votre position." id="ONK-GR-G0K">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="OlI-7U-udJ">
                                         <rect key="frame" x="0.0" y="114" width="600" height="44"/>
@@ -253,19 +254,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Rayon d'affichage des arrêts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YsI-4m-bu8">
-                                                    <rect key="frame" x="15" y="0.0" width="240" height="43"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Rayon Arrêts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YsI-4m-bu8">
+                                                    <rect key="frame" x="15" y="0.0" width="180" height="43"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="240" id="kdn-MZ-Kcf"/>
+                                                        <constraint firstAttribute="width" constant="180" id="kdn-MZ-Kcf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="zfb-gW-z7t">
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="250" minimumValue="100" maximumValue="2000" stepValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="zfb-gW-z7t">
                                                     <rect key="frame" x="498" y="7" width="94" height="29"/>
+                                                    <connections>
+                                                        <action selector="radiusStopPlacesSteppedValueChanged:" destination="ca8-wT-0Oo" eventType="valueChanged" id="eBA-Oy-9Ca"/>
+                                                    </connections>
                                                 </stepper>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="250m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwu-6C-veC">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="250m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwu-6C-veC">
                                                     <rect key="frame" x="445" y="11" width="45" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -278,6 +282,8 @@
                                                 <constraint firstItem="YsI-4m-bu8" firstAttribute="top" secondItem="mWB-4z-hoZ" secondAttribute="top" id="bbj-vb-klF"/>
                                                 <constraint firstItem="zfb-gW-z7t" firstAttribute="trailing" secondItem="mWB-4z-hoZ" secondAttribute="trailingMargin" id="igL-U7-TPO"/>
                                                 <constraint firstItem="zfb-gW-z7t" firstAttribute="centerY" secondItem="mWB-4z-hoZ" secondAttribute="centerY" id="p6V-b7-Fo1"/>
+                                                <constraint firstItem="bwu-6C-veC" firstAttribute="centerY" secondItem="zfb-gW-z7t" secondAttribute="centerY" id="q9Z-YH-OtG"/>
+                                                <constraint firstItem="zfb-gW-z7t" firstAttribute="leading" secondItem="bwu-6C-veC" secondAttribute="trailing" constant="8" id="rWq-7W-TgR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -287,7 +293,7 @@
                                 <string key="footerTitle">Cette application est expérimentale. Elle a pour but de pallier l'absence (provisoire j'espère) de la fonction Transit d'iOS 9 sur Paris. Elle n'est pas parfaite et son design est très moyen mais elle fonctionne ! Si vous avez des soucis ou des suggestions, n'hésitez pas à me contacter par Twitter. Enfin, attendez-vous à des fonctions innovantes qui vont arriver avec les futures mises à jour !</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="PE2-hf-4VD" imageView="I9f-hi-TTz" style="IBUITableViewCellStyleDefault" id="Z2b-VZ-ZsP">
-                                        <rect key="frame" x="0.0" y="253" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="269" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z2b-VZ-ZsP" id="Dsm-co-1R9">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -307,6 +313,26 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Yzc-dk-PMP" style="IBUITableViewCellStyleDefault" id="3sB-YL-K5R">
+                                        <rect key="frame" x="0.0" y="313" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3sB-YL-K5R" id="KOa-Is-Zpq">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Projets Open Source utilisés" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yzc-dk-PMP">
+                                                    <rect key="frame" x="15" y="0.0" width="550" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="pHb-qN-qys" kind="show" id="Do1-fQ-IW8"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -315,15 +341,50 @@
                             <outlet property="delegate" destination="ca8-wT-0Oo" id="MPw-8e-acM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Réglages" id="8hK-Da-KBR"/>
+                    <navigationItem key="navigationItem" title="Réglages" id="8hK-Da-KBR">
+                        <barButtonItem key="rightBarButtonItem" image="heart" id="qZd-Hc-fsO">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="currentRadiusLabel" destination="bwu-6C-veC" id="rFR-vp-al5"/>
+                        <outlet property="currentRadiusStepper" destination="zfb-gW-z7t" id="4FP-yA-aGU"/>
                         <outlet property="displayNonStoppingTrainsSwitch" destination="akO-C3-DSr" id="gth-DR-vEh"/>
                         <outlet property="followTwitterCell" destination="Z2b-VZ-ZsP" id="wlX-jK-M7j"/>
+                        <outlet property="loveBarButtonItem" destination="qZd-Hc-fsO" id="wwc-HX-tVa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNY-N4-BbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1616" y="495"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="woS-KB-bQd">
+            <objects>
+                <tableViewController id="pHb-qN-qys" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GuT-uw-g54">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hE1-Jn-7Ta">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hE1-Jn-7Ta" id="OgB-hF-djU">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pHb-qN-qys" id="anb-Gc-FIe"/>
+                            <outlet property="delegate" destination="pHb-qN-qys" id="AMc-Q4-yfQ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5bt-hK-FBu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2355" y="495"/>
         </scene>
         <!--Réglages-->
         <scene sceneID="Njh-JP-3PP">
@@ -348,6 +409,7 @@
     <resources>
         <image name="Settings" width="32" height="32"/>
         <image name="Transit" width="32" height="32"/>
+        <image name="heart" width="22" height="22"/>
         <image name="twitter" width="16" height="16"/>
     </resources>
 </document>

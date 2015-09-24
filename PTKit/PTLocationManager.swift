@@ -8,12 +8,15 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 public class PTLocationManager: NSObject, CLLocationManagerDelegate {
     public static let sharedManager = PTLocationManager()
     
     private let locationManager = CLLocationManager()
     private var lastUsersLocation: CLLocation!
+    
+    lazy public var distanceFormatter = MKDistanceFormatter()
     
     public var delegate: PTLocationManagerDelegate?
     

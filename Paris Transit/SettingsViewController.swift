@@ -17,12 +17,15 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var followTwitterCell: UITableViewCell!
     @IBOutlet weak var displayNonStoppingTrainsSwitch: UISwitch!
     
+    @IBOutlet weak var currentRadiusLabel: UILabel!
+    @IBOutlet weak var currentRadiusStepper: UIStepper!
+    
+    @IBOutlet weak var loveBarButtonItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.prepareUserInterface()
-        
-        self.twitterVerifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,13 +36,37 @@ class SettingsViewController: UITableViewController {
     // MARK: - User Interface
     
     func prepareUserInterface() {
+        // Settings
         self.displayNonStoppingTrainsSwitch.on = PTPreferencesManager.sharedManager.displayNonStoppingTrains()
+        let currentRadius = PTPreferencesManager.sharedManager.radiusStopPlaces()
+        self.currentRadiusStepper.value = currentRadius
+        self.currentRadiusLabel.text = PTLocationManager.sharedManager.distanceFormatter.stringFromDistance(currentRadius)
+        
+        // Social
+        if PTPreferencesManager.sharedManager.twitterAccessAsked() {
+            if PTPreferencesManager.sharedManager.doesUserFollowUs() {
+                self.loveBarButtonItem.enabled = true
+                self.followTwitterCell.textLabel!.text = "Merci. Voir mes tweets !"
+            } else {
+                self.loveBarButtonItem.enabled = false
+                self.followTwitterCell.textLabel!.text = "Snif... Voir mes tweets quand même !"
+            }
+        }
+        else {
+            self.loveBarButtonItem.enabled = false
+        }
     }
     
     // MARK: - Actions
     
     @IBAction func displayNonStoppingTrainsValueChanged(sender: UISwitch) {
         PTPreferencesManager.sharedManager.setDisplayNonStoppingTrains(sender.on)
+    }
+    
+    @IBAction func radiusStopPlacesSteppedValueChanged(sender: UIStepper) {
+        let currentRadius = sender.value
+        PTPreferencesManager.sharedManager.setRadiusStopPlaces(currentRadius)
+        self.currentRadiusLabel.text = PTLocationManager.sharedManager.distanceFormatter.stringFromDistance(currentRadius)
     }
     
     // MARK: - Follow Twitter Stuff
@@ -49,6 +76,8 @@ class SettingsViewController: UITableViewController {
         let twitterAccountType = account.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
     
         account.requestAccessToAccountsWithType(twitterAccountType, options: nil) { (success, error) -> Void in
+            PTPreferencesManager.sharedManager.setTwitterAccessAsked(true)
+            
             if success {
                 let allAcounts = account.accountsWithAccountType(twitterAccountType)
                 
@@ -56,8 +85,13 @@ class SettingsViewController: UITableViewController {
                     let twitterAccount = allAcounts.last as! ACAccount // On devrait plutôt afficher tous les comptes et laisser le user choisir
                     
                     self.doYouFollowVanadiumVerification(twitterAccount, completionHandler: { (follow) -> Void in
+                        PTPreferencesManager.sharedManager.setUserFollowUs(follow)
+                        
                         if follow {
-                            self.followTwitterCell.textLabel!.text = "Merci de me suivre sur Twitter !"
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.loveBarButtonItem.enabled = true
+                                self.followTwitterCell.textLabel!.text = "Merci de me suivre sur Twitter !"
+                            }
                         }
                         else {
                             self.followVanadium(twitterAccount)
@@ -139,14 +173,33 @@ class SettingsViewController: UITableViewController {
     }
     
     private func showSuccessWithStatus(status: String) {
+        PTPreferencesManager.sharedManager.setUserFollowUs(true)
+        
         dispatch_async(dispatch_get_main_queue()) {
             SVProgressHUD.showSuccessWithStatus(status)
+            self.loveBarButtonItem.enabled = true
         }
     }
 
     private func showErrorWithStatus(status: String) {
         dispatch_async(dispatch_get_main_queue()) {
             SVProgressHUD.showErrorWithStatus(status)
+        }
+    }
+    
+    // MARK: - Table View Delegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 && indexPath.row == 0
+        {
+            if PTPreferencesManager.sharedManager.twitterAccessAsked()
+            {
+                UIApplication.sharedApplication().openURL(NSURL(string: "https://twitter.com/adamcnight")!)
+            }
+            else
+            {
+                self.twitterVerifications()
+            }
         }
     }
 

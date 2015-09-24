@@ -25,9 +25,7 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
             nearestStopPlace = newValue.count > 0 ? newValue.first! : nil
         }
     }
-    
-    lazy private var distanceFormatter = MKDistanceFormatter()
-    
+
     lazy private var linesDataSource = LinesDataSource()
     lazy private var timetableDataSource = TimetableDataSource()
     
@@ -50,6 +48,8 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var linesTableView: UITableView!
     @IBOutlet weak var timetablesTableView: UITableView!
+    
+    @IBOutlet weak var refreshBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,13 +96,15 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     }
     
     private func displayStopPins() {
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        
         var stopPlacesAnnotations = [PTPointAnnotation]()
         
         for stopPlace in self.nearbyStopPlaces
         {
             let stopPlaceAnnotation = PTPointAnnotation(stopPlace: stopPlace)
             let numberOfSupportedLines = self.linesDataSource.numberOfSupportedLines(stopPlace, lineTypes: self.allowedLineTypes)
-            let distanceString = self.distanceFormatter.stringFromDistance(stopPlace.distance)
+            let distanceString = PTLocationManager.sharedManager.distanceFormatter.stringFromDistance(stopPlace.distance)
             stopPlaceAnnotation.setSubtitleWithDistance(distanceString, numberOfSupportedLines: numberOfSupportedLines)
             stopPlacesAnnotations.append(stopPlaceAnnotation)
         }
@@ -119,7 +121,9 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     // MARK: - Data
     
     func getStopPlacesNearUsersLocation(location: CLLocation) {
-        PTRATPProvider.sharedProvider.loadAndfilterStopPlaces(location, radius: 1000, lineTypes: self.allowedLineTypes, completionHandler: { (filteredStopPlaces) -> () in
+        let radius = PTPreferencesManager.sharedManager.radiusStopPlaces()
+        
+        PTRATPProvider.sharedProvider.loadAndfilterStopPlaces(location, radius: radius, lineTypes: self.allowedLineTypes, completionHandler: { (filteredStopPlaces) -> () in
             dispatch_async(dispatch_get_main_queue()) {
                 if let filteredStopPlaces = filteredStopPlaces
                 {
@@ -139,6 +143,8 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
                         self.timetablesTableView.reloadEmptyDataSet()
                     }
                 }
+                
+                self.refreshBarButtonItem.enabled = true
             }
         })
     }
@@ -198,7 +204,7 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
         }
     }
     
-    // MARK: - Location
+    // MARK: - Location/Delegate
     
     func locationManagerGotUsersLocation(locationManager: PTLocationManager, location: CLLocation) {
         print("Ready to load stop places...")
@@ -381,6 +387,7 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     // MARK: - Actions
     
     @IBAction func refreshEverythingAction(sender: UIBarButtonItem) {
+        sender.enabled = false
         PTLocationManager.sharedManager.requestUsersLocation()
     }
 }
