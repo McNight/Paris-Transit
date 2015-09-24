@@ -40,8 +40,26 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
         }
     }
     
-    private var selectedLineIndex = 0
-    private var selectedStopPlace: PTStopPlace?
+    private var selectedStopPlace: PTStopPlace? {
+        didSet {
+            self.favoriteVerification()
+        }
+    }
+    private var selectedLineIndex = 0 {
+        didSet {
+            self.favoriteVerification()
+        }
+    }
+    private var selectedStopPlaceIsFavorite = false {
+        willSet {
+            if newValue {
+                self.favoriteBarButtonItem.image = UIImage(named: "filled-star")
+            }
+            else {
+                self.favoriteBarButtonItem.image = UIImage(named: "star")
+            }
+        }
+    }
     
     private var failureReason: FailureReason = .NoFailure
     
@@ -50,6 +68,7 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     @IBOutlet weak var timetablesTableView: UITableView!
     
     @IBOutlet weak var refreshBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var favoriteBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +86,9 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     
     func prepareUserInterface() {
         // Empty Data Sets
+        self.linesTableView.delegate = self
         self.linesTableView.emptyDataSetSource = self
         self.linesTableView.emptyDataSetDelegate = self
-        self.linesTableView.delegate = self
         self.timetablesTableView.emptyDataSetSource = self
         self.timetablesTableView.emptyDataSetDelegate = self
         
@@ -201,6 +220,21 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
             self.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "refreshCurrentTimetableFromTimer", userInfo: nil, repeats: true)
             
             refreshControl.endRefreshing()
+        }
+    }
+    
+    func favoriteVerification() {
+        let favoriteStopPlaces = PTPreferencesManager.sharedManager.favoriteStopPlaces()
+        
+        if favoriteStopPlaces != nil
+        {
+            for favorite in favoriteStopPlaces {
+                if self.selectedLineIndex == favorite[self.selectedStopPlace!.identifier] {
+                    self.favoriteBarButtonItem.image = UIImage(named: "filled-star")
+                    self.selectedStopPlaceIsFavorite = true
+                    break
+                }
+            }
         }
     }
     
@@ -389,5 +423,35 @@ class TransitViewController: UIViewController, UITableViewDelegate, MKMapViewDel
     @IBAction func refreshEverythingAction(sender: UIBarButtonItem) {
         sender.enabled = false
         PTLocationManager.sharedManager.requestUsersLocation()
+    }
+    
+    @IBAction func favoriteAction(sender: UIBarButtonItem) {
+        let isAdding = !self.selectedStopPlaceIsFavorite
+        var alertController: UIAlertController!
+        
+        if isAdding {
+            alertController = UIAlertController(title: "Favoris", message: "Ajouter cet arrêt et cette ligne aux favoris ?", preferredStyle: .Alert)
+            
+            let doAction = UIAlertAction(title: "Ajouter", style: .Default, handler: { _ -> Void in
+                PTPreferencesManager.sharedManager.addFavoriteStopPlace(self.selectedStopPlace!.identifier, lineIdentifier: self.selectedLineIndex)
+                self.selectedStopPlaceIsFavorite = true
+            })
+            alertController.addAction(doAction)
+        } else {
+            alertController = UIAlertController(title: "Favoris", message: "Retirer cet arrêt et cette ligne des favoris ?", preferredStyle: .Alert)
+            
+            let doAction = UIAlertAction(title: "Retirer", style: .Destructive, handler: { _ -> Void in
+                PTPreferencesManager.sharedManager.removeFavoriteStopPlace(self.selectedStopPlace!.identifier, lineIdentifier: self.selectedLineIndex)
+                self.selectedStopPlaceIsFavorite = false
+            })
+            alertController.addAction(doAction)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

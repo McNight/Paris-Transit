@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Paris Transit Center.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Paris Transit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>D69824101BB4571700992F4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D6C4CEFE1BA9A40B00795085</key>
 		<dict>
 			<key>primary</key>

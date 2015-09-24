@@ -10,6 +10,7 @@ import UIKit
 
 public class LinesDataSource: NSObject, UITableViewDataSource {
     public var stopPlace: PTStopPlace?
+    public var isWidgetPresenting = false
 
     public func imageNameForLineType(type: Int, code: String) -> String? {
         switch type {
@@ -62,7 +63,8 @@ public class LinesDataSource: NSObject, UITableViewDataSource {
     }
     
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Arrêt : " + self.stopPlace!.name
+        let title = self.isWidgetPresenting ? self.stopPlace!.name : "Arrêt : " + self.stopPlace!.name
+        return title
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

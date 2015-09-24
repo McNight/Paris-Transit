@@ -88,6 +88,14 @@ public class PTRATPProvider {
         }
     }
     
+    public func loadAndFilterStopPlacesFromWidget(location: CLLocation, radius: CLLocationDistance, linesTypes: [Int], completionHandler: PTStopPlace? -> ()) {
+        self.loadAndfilterStopPlaces(location, radius: radius, lineTypes: linesTypes) { stopPlaces -> () in
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(stopPlaces?.first!)
+            }
+        }
+    }
+
     private func purgeStopPlaces() {
         self.stopPlaces.removeAll()
     }

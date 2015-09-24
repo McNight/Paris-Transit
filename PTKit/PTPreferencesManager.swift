@@ -18,6 +18,7 @@ public class PTPreferencesManager {
     private let PTRadiusStopPlacesPreferencesKey = "PTRadiusStopPlacesPreferencesKey"
     private let PTTwitterAccessAskedPreferencesKey = "PTTwitterAccessAskedPreferencesKey"
     private let PTTwitterUsersFollowUsPreferencesKey = "PTTwitterUsersFollowUsPreferencesKey"
+    private let PTFavoriteStopPlacesKey = "PTFavoriteStopPlacesKey"
     
     public func alreadyLaunchedVerification() -> Bool {
         let alreadyLaunched = self.usersDefaults.boolForKey(PTAlreadyLaunchedPreferencesKey)
@@ -73,6 +74,42 @@ public class PTPreferencesManager {
     
     public func setUserFollowUs(newValue: Bool) {
         self.usersDefaults.setBool(newValue, forKey: PTTwitterUsersFollowUsPreferencesKey)
+        self.usersDefaults.synchronize()
+    }
+    
+    public func favoriteStopPlaces() -> [[Int : Int]]! {
+        if let data = NSUserDefaults.standardUserDefaults().objectForKey(PTFavoriteStopPlacesKey) as? NSData {
+            let favoriteStopPlaces = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [[Int : Int]]
+            return favoriteStopPlaces
+        }
+        return nil
+    }
+    
+    public func addFavoriteStopPlace(stopPlaceIdentifier: Int, lineIdentifier: Int) {
+        var favoriteStopPlaces = self.favoriteStopPlaces()
+        
+        if favoriteStopPlaces == nil {
+            favoriteStopPlaces = [[stopPlaceIdentifier : lineIdentifier]]
+        } else {
+            favoriteStopPlaces.append([stopPlaceIdentifier : lineIdentifier])
+        }
+        
+        let data = NSKeyedArchiver.archivedDataWithRootObject(favoriteStopPlaces)
+        self.usersDefaults.setObject(data, forKey: PTFavoriteStopPlacesKey)
+        self.usersDefaults.synchronize()
+    }
+    
+    public func removeFavoriteStopPlace(stopPlaceIdentifier: Int, lineIdentifier: Int) {
+        var favoriteStopPlaces = self.favoriteStopPlaces()
+        
+        for (index, favorite) in favoriteStopPlaces.enumerate() {
+            if favorite[stopPlaceIdentifier] == lineIdentifier {
+                favoriteStopPlaces.removeAtIndex(index)
+            }
+        }
+        
+        let data = NSKeyedArchiver.archivedDataWithRootObject(favoriteStopPlaces)
+        self.usersDefaults.setObject(data, forKey: PTFavoriteStopPlacesKey)
         self.usersDefaults.synchronize()
     }
 }
