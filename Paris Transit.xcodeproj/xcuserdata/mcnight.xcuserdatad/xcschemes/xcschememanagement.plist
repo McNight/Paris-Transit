@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Glance - Paris Transit Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>PTKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -14,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Paris Transit Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>Paris Transit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -22,6 +32,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>D65D3B811BB4A7DC00180260</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D69824101BB4571700992F4D</key>
 		<dict>
 			<key>primary</key>

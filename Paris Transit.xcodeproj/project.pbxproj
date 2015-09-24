@@ -12,6 +12,14 @@
 		D62CAA601BAAFF3300F41C5F /* LinesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		D62CAA621BAB01A500F41C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D62CAA611BAB01A500F41C5F /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		D62CAA641BAB078D00F41C5F /* TimetableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62CAA631BAB078D00F41C5F /* TimetableDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		D65D3B861BB4A7DD00180260 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D65D3B841BB4A7DD00180260 /* Interface.storyboard */; };
+		D65D3B881BB4A7DD00180260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D65D3B871BB4A7DD00180260 /* Assets.xcassets */; };
+		D65D3B8F1BB4A7DD00180260 /* Paris Transit Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D65D3B8E1BB4A7DD00180260 /* Paris Transit Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D65D3B941BB4A7DD00180260 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B931BB4A7DD00180260 /* InterfaceController.swift */; };
+		D65D3B961BB4A7DD00180260 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B951BB4A7DD00180260 /* ExtensionDelegate.swift */; };
+		D65D3B981BB4A7DD00180260 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65D3B971BB4A7DD00180260 /* GlanceController.swift */; };
+		D65D3B9A1BB4A7DD00180260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D65D3B991BB4A7DD00180260 /* Assets.xcassets */; };
+		D65D3B9E1BB4A7DD00180260 /* Paris Transit Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D65D3B821BB4A7DC00180260 /* Paris Transit Watch.app */; };
 		D6791B1A1BAB339F009C20B3 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6791B181BAB339F009C20B3 /* DZNEmptyDataSet.framework */; };
 		D6791B1B1BAB339F009C20B3 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6791B191BAB339F009C20B3 /* SVProgressHUD.framework */; };
 		D69824131BB4571700992F4D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D69824121BB4571700992F4D /* NotificationCenter.framework */; settings = {ASSET_TAGS = (); }; };
@@ -43,6 +51,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D65D3B901BB4A7DD00180260 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6C4CEF71BA9A40B00795085 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D65D3B8D1BB4A7DD00180260;
+			remoteInfo = "Paris Transit Watch Extension";
+		};
+		D65D3B9C1BB4A7DD00180260 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6C4CEF71BA9A40B00795085 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D65D3B811BB4A7DC00180260;
+			remoteInfo = "Paris Transit Watch";
+		};
 		D698241B1BB4571700992F4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D6C4CEF71BA9A40B00795085 /* Project object */;
@@ -81,6 +103,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D65D3BA21BB4A7DD00180260 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D65D3B8F1BB4A7DD00180260 /* Paris Transit Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D65D3BA61BB4A7DD00180260 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D65D3B9E1BB4A7DD00180260 /* Paris Transit Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D69824211BB4571800992F4D /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -112,6 +156,16 @@
 		D62CAA611BAB01A500F41C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D62CAA631BAB078D00F41C5F /* TimetableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableDataSource.swift; sourceTree = "<group>"; };
 		D640623B1BAC619100666A0C /* TimetableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimetableViewCell.swift; path = "../Paris Transit/TimetableViewCell.swift"; sourceTree = "<group>"; };
+		D65D3B821BB4A7DC00180260 /* Paris Transit Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paris Transit Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D65D3B851BB4A7DD00180260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		D65D3B871BB4A7DD00180260 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D65D3B891BB4A7DD00180260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D65D3B8E1BB4A7DD00180260 /* Paris Transit Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Paris Transit Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D65D3B931BB4A7DD00180260 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		D65D3B951BB4A7DD00180260 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		D65D3B971BB4A7DD00180260 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		D65D3B991BB4A7DD00180260 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D65D3B9B1BB4A7DD00180260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6791B181BAB339F009C20B3 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		D6791B191BAB339F009C20B3 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D69824111BB4571700992F4D /* Paris Transit Center.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Paris Transit Center.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +202,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D65D3B8B1BB4A7DD00180260 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D698240E1BB4571700992F4D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,11 +283,26 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		D66801E41BAC604B001AADAE /* Views */ = {
+		D65D3B831BB4A7DD00180260 /* Paris Transit Watch */ = {
 			isa = PBXGroup;
 			children = (
+				D65D3B841BB4A7DD00180260 /* Interface.storyboard */,
+				D65D3B871BB4A7DD00180260 /* Assets.xcassets */,
+				D65D3B891BB4A7DD00180260 /* Info.plist */,
 			);
-			name = Views;
+			path = "Paris Transit Watch";
+			sourceTree = "<group>";
+		};
+		D65D3B921BB4A7DD00180260 /* Paris Transit Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D65D3B931BB4A7DD00180260 /* InterfaceController.swift */,
+				D65D3B951BB4A7DD00180260 /* ExtensionDelegate.swift */,
+				D65D3B971BB4A7DD00180260 /* GlanceController.swift */,
+				D65D3B991BB4A7DD00180260 /* Assets.xcassets */,
+				D65D3B9B1BB4A7DD00180260 /* Info.plist */,
+			);
+			path = "Paris Transit Watch Extension";
 			sourceTree = "<group>";
 		};
 		D6791B1D1BAB33EB009C20B3 /* Frameworks */ = {
@@ -255,6 +331,8 @@
 			children = (
 				D6C4CF011BA9A40B00795085 /* Paris Transit */,
 				D69824141BB4571700992F4D /* Paris Transit Center */,
+				D65D3B831BB4A7DD00180260 /* Paris Transit Watch */,
+				D65D3B921BB4A7DD00180260 /* Paris Transit Watch Extension */,
 				D6791B1D1BAB33EB009C20B3 /* Frameworks */,
 				D6C4CF181BA9A40C00795085 /* Paris TransitTests */,
 				D6C4CF2A1BA9A42200795085 /* PTKit */,
@@ -271,6 +349,8 @@
 				D6C4CF291BA9A42200795085 /* PTKit.framework */,
 				D6C4CF321BA9A42200795085 /* PTKitTests.xctest */,
 				D69824111BB4571700992F4D /* Paris Transit Center.appex */,
+				D65D3B821BB4A7DC00180260 /* Paris Transit Watch.app */,
+				D65D3B8E1BB4A7DD00180260 /* Paris Transit Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -280,7 +360,6 @@
 			children = (
 				D6C4CF021BA9A40B00795085 /* AppDelegate.swift */,
 				D62CAA651BAB099700F41C5F /* View Controllers */,
-				D66801E41BAC604B001AADAE /* Views */,
 				D6C4CF081BA9A40B00795085 /* Main.storyboard */,
 				D62CAA611BAB01A500F41C5F /* Assets.xcassets */,
 				D6C4CF0D1BA9A40B00795085 /* LaunchScreen.storyboard */,
@@ -387,6 +466,40 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		D65D3B811BB4A7DC00180260 /* Paris Transit Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D65D3BA31BB4A7DD00180260 /* Build configuration list for PBXNativeTarget "Paris Transit Watch" */;
+			buildPhases = (
+				D65D3B801BB4A7DC00180260 /* Resources */,
+				D65D3BA21BB4A7DD00180260 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D65D3B911BB4A7DD00180260 /* PBXTargetDependency */,
+			);
+			name = "Paris Transit Watch";
+			productName = "Paris Transit Watch";
+			productReference = D65D3B821BB4A7DC00180260 /* Paris Transit Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		D65D3B8D1BB4A7DD00180260 /* Paris Transit Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D65D3B9F1BB4A7DD00180260 /* Build configuration list for PBXNativeTarget "Paris Transit Watch Extension" */;
+			buildPhases = (
+				D65D3B8A1BB4A7DD00180260 /* Sources */,
+				D65D3B8B1BB4A7DD00180260 /* Frameworks */,
+				D65D3B8C1BB4A7DD00180260 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Paris Transit Watch Extension";
+			productName = "Paris Transit Watch Extension";
+			productReference = D65D3B8E1BB4A7DD00180260 /* Paris Transit Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		D69824101BB4571700992F4D /* Paris Transit Center */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D69824201BB4571800992F4D /* Build configuration list for PBXNativeTarget "Paris Transit Center" */;
@@ -414,12 +527,14 @@
 				D6C4CF431BA9A42200795085 /* Embed Frameworks */,
 				D6791B1C1BAB33A9009C20B3 /* Carthage */,
 				D69824211BB4571800992F4D /* Embed App Extensions */,
+				D65D3BA61BB4A7DD00180260 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				D6C4CF3D1BA9A42200795085 /* PBXTargetDependency */,
 				D698241C1BB4571700992F4D /* PBXTargetDependency */,
+				D65D3B9D1BB4A7DD00180260 /* PBXTargetDependency */,
 			);
 			name = "Paris Transit";
 			productName = "Paris Transit";
@@ -491,6 +606,14 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Vanadium Applications";
 				TargetAttributes = {
+					D65D3B811BB4A7DC00180260 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 6NVS48W6G3;
+					};
+					D65D3B8D1BB4A7DD00180260 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 6NVS48W6G3;
+					};
 					D69824101BB4571700992F4D = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 6NVS48W6G3;
@@ -533,11 +656,30 @@
 				D6C4CF281BA9A42200795085 /* PTKit */,
 				D6C4CF311BA9A42200795085 /* PTKitTests */,
 				D69824101BB4571700992F4D /* Paris Transit Center */,
+				D65D3B811BB4A7DC00180260 /* Paris Transit Watch */,
+				D65D3B8D1BB4A7DD00180260 /* Paris Transit Watch Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D65D3B801BB4A7DC00180260 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D65D3B881BB4A7DD00180260 /* Assets.xcassets in Resources */,
+				D65D3B861BB4A7DD00180260 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D65D3B8C1BB4A7DD00180260 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D65D3B9A1BB4A7DD00180260 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D698240F1BB4571700992F4D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -600,6 +742,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D65D3B8A1BB4A7DD00180260 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D65D3B961BB4A7DD00180260 /* ExtensionDelegate.swift in Sources */,
+				D65D3B941BB4A7DD00180260 /* InterfaceController.swift in Sources */,
+				D65D3B981BB4A7DD00180260 /* GlanceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D698240D1BB4571700992F4D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -657,6 +809,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D65D3B911BB4A7DD00180260 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D65D3B8D1BB4A7DD00180260 /* Paris Transit Watch Extension */;
+			targetProxy = D65D3B901BB4A7DD00180260 /* PBXContainerItemProxy */;
+		};
+		D65D3B9D1BB4A7DD00180260 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D65D3B811BB4A7DC00180260 /* Paris Transit Watch */;
+			targetProxy = D65D3B9C1BB4A7DD00180260 /* PBXContainerItemProxy */;
+		};
 		D698241C1BB4571700992F4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D69824101BB4571700992F4D /* Paris Transit Center */;
@@ -685,6 +847,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D65D3B841BB4A7DD00180260 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D65D3B851BB4A7DD00180260 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		D69824171BB4571700992F4D /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -712,6 +882,66 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D65D3BA01BB4A7DD00180260 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Paris Transit Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.Paris-Transit.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		D65D3BA11BB4A7DD00180260 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Paris Transit Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.Paris-Transit.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		D65D3BA41BB4A7DD00180260 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = Paris_Transit_Watch_Extension;
+				INFOPLIST_FILE = "Paris Transit Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.Paris-Transit.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		D65D3BA51BB4A7DD00180260 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = Paris_Transit_Watch_Extension;
+				INFOPLIST_FILE = "Paris Transit Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcnight-va.Paris-Transit.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 		D698241E1BB4571800992F4D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -951,6 +1181,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D65D3B9F1BB4A7DD00180260 /* Build configuration list for PBXNativeTarget "Paris Transit Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D65D3BA01BB4A7DD00180260 /* Debug */,
+				D65D3BA11BB4A7DD00180260 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D65D3BA31BB4A7DD00180260 /* Build configuration list for PBXNativeTarget "Paris Transit Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D65D3BA41BB4A7DD00180260 /* Debug */,
+				D65D3BA51BB4A7DD00180260 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D69824201BB4571800992F4D /* Build configuration list for PBXNativeTarget "Paris Transit Center" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
