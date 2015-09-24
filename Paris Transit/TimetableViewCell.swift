@@ -9,6 +9,7 @@
 import UIKit
 
 public class TimetableViewCell: UITableViewCell {
+    @IBOutlet public weak var stopInStationImageView: UIImageView!
     @IBOutlet public weak var mainLabel: UILabel!
     @IBOutlet public weak var detailLabel: UILabel!
     @IBOutlet public weak var accessoryLabel: UILabel!

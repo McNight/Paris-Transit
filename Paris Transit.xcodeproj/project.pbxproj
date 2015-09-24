@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D600C1201BB2B582004E9C3B /* PTPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D600C11F1BB2B582004E9C3B /* PTPointAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
 		D62CAA5C1BAAF96700F41C5F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62CAA5B1BAAF96700F41C5F /* MapKit.framework */; };
 		D62CAA601BAAFF3300F41C5F /* LinesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		D62CAA621BAB01A500F41C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D62CAA611BAB01A500F41C5F /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
@@ -82,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D600C11F1BB2B582004E9C3B /* PTPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTPointAnnotation.swift; sourceTree = "<group>"; };
 		D62CAA5B1BAAF96700F41C5F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D62CAA5F1BAAFF3300F41C5F /* LinesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesDataSource.swift; sourceTree = "<group>"; };
 		D62CAA611BAB01A500F41C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				D6C4CF471BA9A46900795085 /* PTDirection.swift */,
 				D6C4CF491BA9A49F00795085 /* PTLine.swift */,
 				D6C4CF4B1BA9A51500795085 /* PTStopPlace.swift */,
+				D600C11F1BB2B582004E9C3B /* PTPointAnnotation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				D62CAA601BAAFF3300F41C5F /* LinesDataSource.swift in Sources */,
 				D6D4E7EC1BAC6502001ED3CA /* TimetableViewCell.swift in Sources */,
 				D6C4CF4C1BA9A51500795085 /* PTStopPlace.swift in Sources */,
+				D600C1201BB2B582004E9C3B /* PTPointAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,11 +15,12 @@ public class PTPreferencesManager {
     
     private let PTAlreadyLaunchedPreferencesKey = "PTAlreadyLaunchedPreferencesKey"
     private let PTDisplayNonStoppingTrainsPreferencesKey = "PTDisplayNonStoppingTrainsPreferencesKey"
+    private let PTTwitterAccessAskedPreferencesKey = "PTTwitterAccessAskedPreferencesKey"
     
     public func alreadyLaunchedVerification() -> Bool {
         let alreadyLaunched = self.usersDefaults.boolForKey(PTAlreadyLaunchedPreferencesKey)
         
-        if alreadyLaunched
+        if alreadyLaunched == false
         {
             print("Premier lancement détecté !")
             self.usersDefaults.setBool(true, forKey: PTAlreadyLaunchedPreferencesKey)
@@ -32,6 +33,7 @@ public class PTPreferencesManager {
     
     private func defaultSettingsRegistration() {
         self.usersDefaults.setBool(false, forKey: PTDisplayNonStoppingTrainsPreferencesKey)
+        self.usersDefaults.setBool(false, forKey: PTTwitterAccessAskedPreferencesKey)
     }
     
     public func displayNonStoppingTrains() -> Bool {
@@ -40,6 +42,15 @@ public class PTPreferencesManager {
     
     public func setDisplayNonStoppingTrains(newValue: Bool) {
         self.usersDefaults.setBool(newValue, forKey: PTDisplayNonStoppingTrainsPreferencesKey)
+        self.usersDefaults.synchronize()
+    }
+    
+    public func twitterAccessAsked() -> Bool {
+        return self.usersDefaults.boolForKey(PTTwitterAccessAskedPreferencesKey)
+    }
+    
+    public func setTwitterAccessAsked(newValue: Bool) {
+        self.usersDefaults.setBool(newValue, forKey: PTTwitterAccessAskedPreferencesKey)
         self.usersDefaults.synchronize()
     }
 }

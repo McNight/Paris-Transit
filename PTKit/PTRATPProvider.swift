@@ -15,6 +15,12 @@ public class PTRATPProvider {
     private let PTStopPlacesFileName = "RPStopPlaces"
     private let PTRATPTimetableURL: NSString = "http://apixha.ixxi.net/APIX?keyapp=mPnXzdqWEI0EFvmlgJv9&withDetails=true&stopArea=%d&cmd=getNextStopsRealtime&apixFormat=json&line=%d&withText=true&direction=%d"
     
+    private var session: NSURLSession {
+        let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: sessionConfiguration)
+        return session
+    }
+    
     public var stopPlaces = [Int : PTStopPlace]()
     
     public func loadAndfilterStopPlaces(location: CLLocation, radius: CLLocationDistance, lineTypes: [Int], completionHandler: ([PTStopPlace]?) -> ()) {
@@ -86,9 +92,16 @@ public class PTRATPProvider {
         self.stopPlaces.removeAll()
     }
     
-    public func getStopTimetableWithRequest(request: PTTimetableRequest, limit: Int, completionHandler: (PTTimetable?) -> Void) {
-        let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfiguration)
+    public func getStopTimetableWithRequest(inout request: PTTimetableRequest, limit: Int, completionHandler: (PTTimetable?) -> Void) {
+        if request.lastUpdate != nil && request.lastUpdate!.timeIntervalSinceNow > -15 {
+            print("Too Soon")
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(nil)
+            }
+            return
+        }
+        
+        request.lastUpdate = NSDate()
         
         let stopPlace = request.stopPlace
         let line = stopPlace.lines[request.lineIndex]
@@ -104,13 +117,15 @@ public class PTRATPProvider {
         let firstURL = NSURL(string: String(firstRATPTimetableURL))
         let secondURL = NSURL(string: String(secondRATPTimetableURL))
         
-        let firstDataTask = session.dataTaskWithURL(firstURL!) { (data, response, error) -> Void in
+        let firstDataTask = self.session.dataTaskWithURL(firstURL!) { (data, response, error) -> Void in
             if let error = error
             {
                 print("Response First Data Task : \(response?.description)")
                 print("Error : \(error.localizedDescription)")
                 
-                completionHandler(nil)
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(nil)
+                }
             }
             else
             {
@@ -118,21 +133,23 @@ public class PTRATPProvider {
                 print("Status Code : \(newResponse.statusCode)")
                 
                 self.parseTimetableData(data!, request: request, limit: limit, completionHandler: { (firstResults: [PTTimetableResult]?) -> Void in
-                    let secondDataTask = session.dataTaskWithURL(secondURL!, completionHandler: { (data, response, error) -> Void in
+                    let secondDataTask = self.session.dataTaskWithURL(secondURL!, completionHandler: { (data, response, error) -> Void in
                         if let error = error
                         {
                             print("Response Second Data Task: \(response?.description)")
                             print("Error : \(error.localizedDescription)")
                             
-                            completionHandler(nil)
+                            dispatch_async(dispatch_get_main_queue()) {
+                                completionHandler(nil)
+                            }
                         }
                         else
                         {
                             self.parseTimetableData(data!, request: request, limit: limit, completionHandler: { (secondResults) -> Void in
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                dispatch_async(dispatch_get_main_queue()) {
                                     let timetable = PTTimetable(request: request, firstDirectionResults: firstResults, secondDirectionResults: secondResults)
                                     completionHandler(timetable)
-                                })
+                                }
                             })
                         }
                     })
@@ -158,7 +175,9 @@ public class PTRATPProvider {
                 }
             }
             
-            completionHandler(nearestStopPlaces)
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(nearestStopPlaces)
+            }
         }
     }
     
@@ -213,9 +232,9 @@ public class PTRATPProvider {
                 }
             }
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(results)
-            })
+            }
         } catch let error as NSError {
             print("Error parsing Timetable JSON Object : \(error.localizedDescription)")
         }

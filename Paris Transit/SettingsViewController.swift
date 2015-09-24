@@ -9,14 +9,18 @@
 import UIKit
 import Accounts
 import Social
+import PTKit
 import SVProgressHUD
 
 class SettingsViewController: UITableViewController {
 
     @IBOutlet weak var followTwitterCell: UITableViewCell!
+    @IBOutlet weak var displayNonStoppingTrainsSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.prepareUserInterface()
         
         self.twitterVerifications()
     }
@@ -24,6 +28,18 @@ class SettingsViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - User Interface
+    
+    func prepareUserInterface() {
+        self.displayNonStoppingTrainsSwitch.on = PTPreferencesManager.sharedManager.displayNonStoppingTrains()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func displayNonStoppingTrainsValueChanged(sender: UISwitch) {
+        PTPreferencesManager.sharedManager.setDisplayNonStoppingTrains(sender.on)
     }
     
     // MARK: - Follow Twitter Stuff

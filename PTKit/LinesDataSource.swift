@@ -11,7 +11,7 @@ import UIKit
 public class LinesDataSource: NSObject, UITableViewDataSource {
     public var stopPlace: PTStopPlace?
 
-    private func imageNameForLineType(type: Int, code: String) -> String? {
+    public func imageNameForLineType(type: Int, code: String) -> String? {
         switch type {
         case 1:
             return "M_" + code

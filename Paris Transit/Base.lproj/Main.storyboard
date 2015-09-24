@@ -81,7 +81,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaX-Wh-L1f">
-                                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
+                                                            <rect key="frame" x="60" y="5" width="32" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -93,19 +93,28 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNB-M6-wDa">
-                                                            <rect key="frame" x="15" y="25" width="31" height="14"/>
+                                                            <rect key="frame" x="60" y="25" width="31" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y0b-Zn-HOd">
+                                                            <rect key="frame" x="30" y="7" width="30" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="Poz-Wu-W95"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="GaX-Wh-L1f" firstAttribute="leading" secondItem="4vA-Q1-8tt" secondAttribute="leadingMargin" constant="7" id="3Gl-pm-BXI"/>
-                                                        <constraint firstItem="GaX-Wh-L1f" firstAttribute="leading" secondItem="bNB-M6-wDa" secondAttribute="leading" id="J01-u0-YrD"/>
-                                                        <constraint firstItem="GaX-Wh-L1f" firstAttribute="top" secondItem="4vA-Q1-8tt" secondAttribute="topMargin" constant="-3" id="MG2-Yr-0IJ"/>
-                                                        <constraint firstItem="bNB-M6-wDa" firstAttribute="top" secondItem="GaX-Wh-L1f" secondAttribute="bottom" id="dFg-nf-Yfh"/>
-                                                        <constraint firstItem="cEl-9v-zI0" firstAttribute="centerY" secondItem="4vA-Q1-8tt" secondAttribute="centerY" id="gve-Tx-YCZ"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="cEl-9v-zI0" secondAttribute="trailing" constant="7" id="nXG-37-S3Z"/>
+                                                        <constraint firstItem="GaX-Wh-L1f" firstAttribute="leading" secondItem="bNB-M6-wDa" secondAttribute="leading" id="0TX-My-9CI"/>
+                                                        <constraint firstAttribute="bottom" secondItem="bNB-M6-wDa" secondAttribute="bottom" constant="4" id="3L2-IM-YVr"/>
+                                                        <constraint firstItem="Y0b-Zn-HOd" firstAttribute="top" secondItem="4vA-Q1-8tt" secondAttribute="topMargin" constant="-1" id="D46-Es-HOh"/>
+                                                        <constraint firstItem="GaX-Wh-L1f" firstAttribute="top" secondItem="4vA-Q1-8tt" secondAttribute="top" constant="5" id="Kim-TJ-HNB"/>
+                                                        <constraint firstItem="Y0b-Zn-HOd" firstAttribute="leading" secondItem="4vA-Q1-8tt" secondAttribute="leading" constant="30" id="Xdf-bb-DVs"/>
+                                                        <constraint firstItem="cEl-9v-zI0" firstAttribute="centerY" secondItem="4vA-Q1-8tt" secondAttribute="centerY" id="kef-Zi-Eb7"/>
+                                                        <constraint firstItem="Y0b-Zn-HOd" firstAttribute="centerY" secondItem="4vA-Q1-8tt" secondAttribute="centerY" id="tPW-pR-fOM"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cEl-9v-zI0" secondAttribute="trailing" constant="15" id="zdX-s4-3kI"/>
+                                                        <constraint firstItem="bNB-M6-wDa" firstAttribute="leading" secondItem="Y0b-Zn-HOd" secondAttribute="trailing" id="zzn-Iw-slK"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,6 +122,7 @@
                                                     <outlet property="accessoryLabel" destination="cEl-9v-zI0" id="rQH-6K-dKI"/>
                                                     <outlet property="detailLabel" destination="bNB-M6-wDa" id="eCD-pZ-jhx"/>
                                                     <outlet property="mainLabel" destination="GaX-Wh-L1f" id="QNp-PF-28P"/>
+                                                    <outlet property="stopInStationImageView" destination="Y0b-Zn-HOd" id="hZO-M3-8Za"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RightDetailCell" textLabel="Tw2-qg-hkZ" detailTextLabel="iMX-GI-cNB" style="IBUITableViewCellStyleValue1" id="Dyo-n0-3dd">
@@ -158,7 +168,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Transit" id="NR9-l8-HrJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="rJu-Uv-l3a"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="rJu-Uv-l3a">
+                            <connections>
+                                <action selector="refreshEverythingAction:" destination="78u-9o-BBW" id="8Pw-rg-fI8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="linesTableView" destination="8FR-9w-mD2" id="kKh-t8-b3T"/>
@@ -218,6 +232,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="akO-C3-DSr">
                                                     <rect key="frame" x="543" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="displayNonStoppingTrainsValueChanged:" destination="ca8-wT-0Oo" eventType="valueChanged" id="8qC-ls-0Gi"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -267,6 +284,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="À propos" id="K6Y-9U-Ozq">
+                                <string key="footerTitle">Cette application est expérimentale. Elle a pour but de pallier l'absence (provisoire j'espère) de la fonction Transit d'iOS 9 sur Paris. Elle n'est pas parfaite et son design est très moyen mais elle fonctionne ! Si vous avez des soucis ou des suggestions, n'hésitez pas à me contacter par Twitter. Enfin, attendez-vous à des fonctions innovantes qui vont arriver avec les futures mises à jour !</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="PE2-hf-4VD" imageView="I9f-hi-TTz" style="IBUITableViewCellStyleDefault" id="Z2b-VZ-ZsP">
                                         <rect key="frame" x="0.0" y="253" width="600" height="44"/>
@@ -299,6 +317,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Réglages" id="8hK-Da-KBR"/>
                     <connections>
+                        <outlet property="displayNonStoppingTrainsSwitch" destination="akO-C3-DSr" id="gth-DR-vEh"/>
                         <outlet property="followTwitterCell" destination="Z2b-VZ-ZsP" id="wlX-jK-M7j"/>
                     </connections>
                 </tableViewController>

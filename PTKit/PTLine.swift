@@ -9,9 +9,9 @@
 import Foundation
 
 public struct PTLine {
-    let identifier: Int
-    let name: String
-    let code: String
-    let directions: [PTDirection]
-    let type: Int
+    public let identifier: Int
+    public let name: String
+    public let code: String
+    public let directions: [PTDirection]
+    public let type: Int
 }

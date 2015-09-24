@@ -11,6 +11,7 @@ import Foundation
 public struct PTTimetableRequest {
     public let stopPlace: PTStopPlace
     public let lineIndex: Int
+    public var lastUpdate: NSDate!
     
     public init(stopPlace: PTStopPlace, lineIndex: Int) {
         self.stopPlace = stopPlace

@@ -19,12 +19,14 @@ public class PTLocationManager: NSObject, CLLocationManagerDelegate {
     
     public func prepareLocationStuff() {
         self.locationManager.delegate = self
-        self.locationManager.distanceFilter = 100.0
+        self.locationManager.distanceFilter = 20.0
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
         if CLLocationManager.authorizationStatus() == .NotDetermined {
             self.locationManager.requestAlwaysAuthorization()
         }
+        
+        self.requestUsersLocation()
     }
     
     public func requestUsersLocation() {
@@ -34,8 +36,13 @@ public class PTLocationManager: NSObject, CLLocationManagerDelegate {
     // MARK: - CLLocationManagerDelegate
     
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Updating...")
         if let location = locations.first {
             if location !== self.lastUsersLocation {
+                if self.lastUsersLocation != nil && self.lastUsersLocation.distanceFromLocation(location) == 0 {
+                    return
+                }
+                
                 self.lastUsersLocation = location
                 delegate?.locationManagerGotUsersLocation(self, location: self.lastUsersLocation)
             }
@@ -50,6 +57,10 @@ public class PTLocationManager: NSObject, CLLocationManagerDelegate {
         print("Finished !")
     }
     
+    public func locationManagerDidPauseLocationUpdates(manager: CLLocationManager) {
+        print("Paused !")
+    }
+    
     public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch (status) {
         case .NotDetermined:
@@ -60,7 +71,6 @@ public class PTLocationManager: NSObject, CLLocationManagerDelegate {
             print("Denied")
         case .AuthorizedAlways:
             print("Authorized Always")
-            self.requestUsersLocation()
         case .AuthorizedWhenInUse:
             print("Authorized When In Use")
         }

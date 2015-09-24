@@ -54,16 +54,19 @@ public class TimetableDataSource: NSObject, UITableViewDataSource {
         var timetableResult: PTTimetableResult!
         var text: String
         var detailText: String
+        var image: UIImage?
         
         switch (indexPath.section) {
         case 0:
             timetableResult = self.timetable.firstDirectionResults[indexPath.row]
-            text = timetableResult.stopInStation ? timetableResult.destination : "\(timetableResult.destination) (sans arrêt)"
+            text = timetableResult.destination
             detailText = "\(timetableResult.waitingTime / 60) min"
+            image = timetableResult.stopInStation ? UIImage(named: "pastilleVerte") : UIImage(named: "pastilleRouge")
         case 1:
             timetableResult = self.timetable.secondDirectionResults[indexPath.row]
-            text = timetableResult.stopInStation ? timetableResult.destination : "\(timetableResult.destination) (sans arrêt)"
+            text = timetableResult.destination
             detailText = "\(timetableResult.waitingTime / 60) min"
+            image = timetableResult.stopInStation ? UIImage(named: "pastilleVerte") : UIImage(named: "pastilleRouge")
         default:
             text = "Erreur"
             detailText = "?"
@@ -78,6 +81,8 @@ public class TimetableDataSource: NSObject, UITableViewDataSource {
                 cell.textLabel!.text = text
                 cell.detailTextLabel!.text = detailText
             }
+            
+            cell.imageView?.image = image
         }
         
         return cell
