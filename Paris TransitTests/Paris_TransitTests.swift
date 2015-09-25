@@ -3,7 +3,7 @@
 //  Paris TransitTests
 //
 //  Created by Adam McNight on 16/09/2015.
-//  Copyright © 2015 Vanadium Applications. All rights reserved.
+//  Copyright © 2015 McNight. All rights reserved.
 //
 
 import XCTest

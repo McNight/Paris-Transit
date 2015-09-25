@@ -3,7 +3,7 @@
 //  Paris Transit
 //
 //  Created by Adam McNight on 16/09/2015.
-//  Copyright © 2015 Vanadium Applications. All rights reserved.
+//  Copyright © 2015 McNight. All rights reserved.
 //
 
 import Foundation
@@ -28,7 +28,7 @@ public class PTPreferencesManager {
             print("Premier lancement détecté !")
             self.usersDefaults.setBool(true, forKey: PTAlreadyLaunchedPreferencesKey)
             self.defaultSettingsRegistration()
-            self.usersDefaults.synchronize()
+            self.usersDefaults.synchronize() // I heard it's not needed anymore ?!
         }
         
         return alreadyLaunched
@@ -47,7 +47,7 @@ public class PTPreferencesManager {
     
     public func setDisplayNonStoppingTrains(newValue: Bool) {
         self.usersDefaults.setBool(newValue, forKey: PTDisplayNonStoppingTrainsPreferencesKey)
-        self.usersDefaults.synchronize()
+        self.usersDefaults.synchronize() // ...
     }
     
     public func radiusStopPlaces() -> Double {
