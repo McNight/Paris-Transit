@@ -221,7 +221,7 @@
                         <sections>
                             <tableViewSection headerTitle="Transit" footerTitle="Augmentez avec la distance de recherche des arrêts par rapport à votre position." id="ONK-GR-G0K">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="OlI-7U-udJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="OlI-7U-udJ">
                                         <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OlI-7U-udJ" id="lg0-P7-mfH">
@@ -253,7 +253,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="pUe-it-Sh8" style="IBUITableViewCellStyleDefault" id="kUi-gV-GfD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="pUe-it-Sh8" style="IBUITableViewCellStyleDefault" id="kUi-gV-GfD">
                                         <rect key="frame" x="0.0" y="158" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kUi-gV-GfD" id="UNJ-lm-vvF">
@@ -273,7 +273,7 @@
                                             <segue destination="Ihe-WJ-93I" kind="show" id="ghg-E1-fhF"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="FfG-8x-neM">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="FfG-8x-neM">
                                         <rect key="frame" x="0.0" y="202" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FfG-8x-neM" id="mWB-4z-hoZ">
@@ -315,10 +315,9 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="À propos" id="K6Y-9U-Ozq">
-                                <string key="footerTitle">Cette application est expérimentale. Elle a pour but de pallier l'absence (provisoire j'espère) de la fonction Transit d'iOS 9 sur Paris. Elle n'est pas parfaite et son design est très moyen mais elle fonctionne ! Si vous avez des soucis ou des suggestions, n'hésitez pas à me contacter par Twitter. Enfin, attendez-vous à des fonctions innovantes qui vont arriver avec les futures mises à jour !</string>
+                            <tableViewSection headerTitle="À propos" footerTitle="LUL" id="K6Y-9U-Ozq">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="PE2-hf-4VD" imageView="I9f-hi-TTz" style="IBUITableViewCellStyleDefault" id="Z2b-VZ-ZsP">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="PE2-hf-4VD" imageView="I9f-hi-TTz" style="IBUITableViewCellStyleDefault" id="Z2b-VZ-ZsP">
                                         <rect key="frame" x="0.0" y="313" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z2b-VZ-ZsP" id="Dsm-co-1R9">
@@ -339,7 +338,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Yzc-dk-PMP" style="IBUITableViewCellStyleDefault" id="3sB-YL-K5R">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="Yzc-dk-PMP" style="IBUITableViewCellStyleDefault" id="3sB-YL-K5R">
                                         <rect key="frame" x="0.0" y="357" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3sB-YL-K5R" id="KOa-Is-Zpq">
@@ -395,7 +394,7 @@
                         <sections>
                             <tableViewSection headerTitle="Librairies" id="O6d-L3-0S9">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TbM-Yj-UIk" style="IBUITableViewCellStyleDefault" id="hE1-Jn-7Ta">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="TbM-Yj-UIk" style="IBUITableViewCellStyleDefault" id="hE1-Jn-7Ta">
                                         <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hE1-Jn-7Ta" id="OgB-hF-djU">
@@ -412,7 +411,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="tG1-ha-6jI" style="IBUITableViewCellStyleDefault" id="rvI-z7-PkD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="tG1-ha-6jI" style="IBUITableViewCellStyleDefault" id="rvI-z7-PkD">
                                         <rect key="frame" x="0.0" y="158" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rvI-z7-PkD" id="G2f-om-BqK">
